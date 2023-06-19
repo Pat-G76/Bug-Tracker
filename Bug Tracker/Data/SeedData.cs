@@ -44,7 +44,22 @@ namespace Bug_Tracker.Data
 			}
 
 			context.SaveChanges();
-		}
+
+            if (!context.IssueTypes.Any())
+            {
+
+                context.IssueTypes.AddRange(
+                    new IssueType { TypeTitle = "Defect" },
+                    new IssueType { TypeTitle = "Enhancement" },
+                    new IssueType { TypeTitle = "Feature" },
+                    new IssueType { TypeTitle = "Task" },
+                    new IssueType { TypeTitle = "Patch" }
+                    );
+            }
+
+            context.SaveChanges();
+
+        }
 		
 		public static async void CreateAdminUser(IApplicationBuilder app)
         {
