@@ -13,7 +13,6 @@ namespace Bug_Tracker.Models
         public string TicketName { get; set; }
         public string Reporter { get; set; }
 
-		[Required(ErrorMessage = "Please enter the assignee name")]
 		public string Assignee { get; set; }
 
 		[DisplayName("Ticket Description")]
@@ -42,7 +41,7 @@ namespace Bug_Tracker.Models
 
 
 		[ForeignKey("TicketID")]
-		public ICollection<EmployeeTicket> EmployeeTickets { get; set; }
+		public ICollection<EmployeeTicket>? EmployeeTickets { get; set; }
         
     }
 }
