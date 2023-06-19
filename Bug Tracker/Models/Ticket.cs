@@ -11,7 +11,6 @@ namespace Bug_Tracker.Models
         [DisplayName("Ticket Name")]
         [Required(ErrorMessage = "Please enter the ticket name")]
         public string TicketName { get; set; }
-        public string Reporter { get; set; }
 
 		public string Assignee { get; set; }
 

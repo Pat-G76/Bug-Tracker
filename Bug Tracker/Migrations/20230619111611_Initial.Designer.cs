@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bug_Tracker.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230619072544_IssueTypeAdded")]
-    partial class IssueTypeAdded
+    [Migration("20230619111611_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -257,10 +257,6 @@ namespace Bug_Tracker.Migrations
 
                     b.Property<int>("ProjectID")
                         .HasColumnType("int");
-
-                    b.Property<string>("Reporter")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StatusID")
                         .HasColumnType("int");

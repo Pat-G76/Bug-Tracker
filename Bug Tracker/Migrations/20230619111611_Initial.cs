@@ -54,6 +54,19 @@ namespace Bug_Tracker.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "IssueType",
+                columns: table => new
+                {
+                    IssueTypeID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TypeTitle = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IssueType", x => x.IssueTypeID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Priority",
                 columns: table => new
                 {
@@ -261,7 +274,6 @@ namespace Bug_Tracker.Migrations
                     TicketID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TicketName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Reporter = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Assignee = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TicketDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OpenedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -269,11 +281,19 @@ namespace Bug_Tracker.Migrations
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProjectID = table.Column<int>(type: "int", nullable: false),
                     StatusID = table.Column<int>(type: "int", nullable: false),
-                    PriorityID = table.Column<int>(type: "int", nullable: false)
+                    PriorityID = table.Column<int>(type: "int", nullable: false),
+                    IssueTypeID = table.Column<int>(type: "int", nullable: false),
+                    TypeID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ticket", x => x.TicketID);
+                    table.ForeignKey(
+                        name: "FK_Ticket_IssueType_TypeID",
+                        column: x => x.TypeID,
+                        principalTable: "IssueType",
+                        principalColumn: "IssueTypeID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ticket_Priority_PriorityID",
                         column: x => x.PriorityID,
@@ -403,6 +423,11 @@ namespace Bug_Tracker.Migrations
                 name: "IX_Ticket_StatusID",
                 table: "Ticket",
                 column: "StatusID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ticket_TypeID",
+                table: "Ticket",
+                column: "TypeID");
         }
 
         /// <inheritdoc />
@@ -440,6 +465,9 @@ namespace Bug_Tracker.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "IssueType");
 
             migrationBuilder.DropTable(
                 name: "Priority");

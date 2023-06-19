@@ -255,10 +255,6 @@ namespace Bug_Tracker.Migrations
                     b.Property<int>("ProjectID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Reporter")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("StatusID")
                         .HasColumnType("int");
 

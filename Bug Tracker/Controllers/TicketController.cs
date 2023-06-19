@@ -30,6 +30,8 @@ namespace Bug_Tracker.Controllers
             Project project = wrapper.Project.GetById(id);
 
             IEnumerable<Status> statuses = wrapper.Status.GetAllItems();
+            IEnumerable<Priority> priorities = wrapper.Priority.GetAllItems();
+            IEnumerable<IssueType> issueTypes = wrapper.IssueType.GetAllItems();
 
 
 
