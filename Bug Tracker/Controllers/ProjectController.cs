@@ -201,7 +201,10 @@ namespace Bug_Tracker.Controllers
 
 					}
 
-					return RedirectToAction("Index", "ProjectEmployee", project.ProjectID);
+					Dictionary<string, int> route = new Dictionary<string, int>();
+					route.Add("id", project.ProjectID);
+
+					return RedirectToAction("Index", "ProjectEmployee", new {@id = project.ProjectID});
 
 				}
 				catch
