@@ -1,10 +1,12 @@
 ﻿using Bug_Tracker.Data;
 using Bug_Tracker.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bug_Tracker.Controllers
 {
+    [Authorize]
     public class TicketController : Controller
     {
         public readonly UserManager<Employee> userManager;

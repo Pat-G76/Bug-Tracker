@@ -27,3 +27,8 @@ table#UserList td {
 table#UserList h4 {
     margin: 2rem 0rem 1rem;
 }
+
+
+form#CreateTicketForm input{
+    margin-bottom: 2rem;
+}
