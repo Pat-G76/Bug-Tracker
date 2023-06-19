@@ -60,7 +60,7 @@
 					
 					@if (User.IsInRole("administrator"))
 					{
-						<a class="btn btn-primary" asp-action="EditProject" asp-route-id="@project.ProjectID">
+						<a class="btn btn-primary" asp-action="UpdateProject" asp-route-id="@project.ProjectID">
 							<i class="fas fa-edit"></i>
 						</a>
 					}

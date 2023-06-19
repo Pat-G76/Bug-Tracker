@@ -24,18 +24,17 @@ namespace Bug_Tracker.Controllers
         }
 
 
-        public async Task<IActionResult> CreateTicket(int id)
+        public IActionResult CreateTicket(int id)
         {
 
-            Project project = wrapper.Project.GetById(id);
+            ViewBag.Priorities = wrapper.Priority.GetAllItems();
+            ViewBag.IssueTypes = wrapper.IssueType.GetAllItems();
 
-            IEnumerable<Status> statuses = wrapper.Status.GetAllItems();
-            IEnumerable<Priority> priorities = wrapper.Priority.GetAllItems();
-            IEnumerable<IssueType> issueTypes = wrapper.IssueType.GetAllItems();
+            Ticket ticket = new Ticket();
 
+            ticket.ProjectID = id;
 
-
-            return View();
+            return View(ticket);
         }
 
     }

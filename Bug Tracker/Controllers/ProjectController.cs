@@ -163,7 +163,7 @@ namespace Bug_Tracker.Controllers
 
 			ViewBag.Request = "Update";
 
-			return RedirectToAction("CreateProject", project);
+			return View("CreateProject", project);
 		}
 
 		[Authorize(Roles = "administrator")]
@@ -189,13 +189,19 @@ namespace Bug_Tracker.Controllers
 					}
 					else
 					{
-						wrapper.Project.Update(project);
+
+						Project oldProject = wrapper.Project.GetById(project.ProjectID);
+
+						oldProject.ProjectName = project.ProjectName;
+						oldProject.ProjectDescription = project.ProjectDescription;
+
+						wrapper.Project.Update(oldProject);
 
 						wrapper.saveChanges();
 
 					}
 
-					return RedirectToAction("Index");
+					return RedirectToAction("Index", "ProjectEmployee", project.ProjectID);
 
 				}
 				catch
