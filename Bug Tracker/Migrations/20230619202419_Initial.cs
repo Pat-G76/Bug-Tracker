@@ -274,7 +274,8 @@ namespace Bug_Tracker.Migrations
                     TicketID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TicketName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Assignee = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AssigneeFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AssigneeLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TicketDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OpenedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -283,7 +284,7 @@ namespace Bug_Tracker.Migrations
                     StatusID = table.Column<int>(type: "int", nullable: false),
                     PriorityID = table.Column<int>(type: "int", nullable: false),
                     IssueTypeID = table.Column<int>(type: "int", nullable: false),
-                    TypeID = table.Column<int>(type: "int", nullable: false)
+                    TypeID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -292,8 +293,7 @@ namespace Bug_Tracker.Migrations
                         name: "FK_Ticket_IssueType_TypeID",
                         column: x => x.TypeID,
                         principalTable: "IssueType",
-                        principalColumn: "IssueTypeID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "IssueTypeID");
                     table.ForeignKey(
                         name: "FK_Ticket_Priority_PriorityID",
                         column: x => x.PriorityID,

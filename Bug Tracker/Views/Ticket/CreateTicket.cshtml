@@ -9,9 +9,11 @@
 <h2 class="m-5"></h2>
 
 
-<div class="d-flex justify-content-center" style="margin-top: 15vh;">
+<div class="d-flex justify-content-center" style="margin-top: 15vh;">	
 
 	<form method="post" asp-action="CreateTicket" id="CreateTicketForm">
+
+		<div asp-validation-summary="All" class="text-danger" style="list-style:circle;"></div>
 
 		<input asp-for="ProjectID" type="hidden" />
 
@@ -33,12 +35,12 @@
 
 				<div class="col-sm-6">
 					<label>Assignee FirstName</label>
-					<input name="FirstName" class="form-control" required />
+					<input name="FirstName" class="form-control" />
 				</div>
 
 				<div class="col-sm-6">
 					<label>Assignee LastName</label>
-					<input name="LastName" class="form-control" required/>
+					<input name="LastName" class="form-control" />
 				</div>
 			
 			</div>
@@ -50,15 +52,15 @@
 			<input asp-for="DueDate" class="form-control" type="datetime-local" />
 		</div>
 
-		<div class="row">
 
-		
-			<label>Priority </label>
+		<label class="pb-2">Priority </label>
+
+		<div class="row ps-3">
 
 			@foreach(Priority priority in ViewBag.Priorities)
 			{
 				<div class="form-check col">
-					<input class="form-check-input" type="radio" name="chosenPriority" id="chosenPriority_@priority.PriorityID">
+					<input class="form-check-input" type="radio" name="chosenPriority" value="@priority.PriorityID" id="chosenPriority_@priority.PriorityID" @(priority.PriorityID == Model.PriorityID ? "checked" : "")>
 					<label class="form-check-label" for="chosenPriority_@priority.PriorityID">
 						@priority.PriorityLevel
 					</label>
@@ -67,17 +69,25 @@
 
 		</div>
 
-		@foreach (IssueType issueType in ViewBag.IssueTypes)
-		{
-			<div class="form-check">
-				<input class="form-check-input" type="radio" name="chosenIssueType" id="chosenIssueType_@issueType.IssueTypeID">
-				<label class="form-check-label" for="chosenIssueType_@issueType.IssueTypeID">
-					@issueType.IssueTypeID
-				</label>
-			</div>
-		}
+		<label class="py-2"> Issue Type </label>
 
-		<button class="btn btn-primary" type="submit"></button>
+
+		<div class="row ps-3">
+
+			@foreach (IssueType issueType in ViewBag.IssueTypes)
+			{
+				<div class="form-check col">
+					<input class="form-check-input" type="radio" name="chosenIssueType" value="@issueType.IssueTypeID" id="chosenIssueType_@issueType.IssueTypeID" @(issueType.IssueTypeID == Model.IssueTypeID ? "checked" : "")>
+					<label class="form-check-label" for="chosenIssueType_@issueType.IssueTypeID">
+						@issueType.TypeTitle
+					</label>
+				</div>
+			}
+
+		</div>
+
+
+		<button class="btn btn-primary" type="submit">Create</button>
 
 	</form>
 

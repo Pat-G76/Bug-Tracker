@@ -233,7 +233,11 @@ namespace Bug_Tracker.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketID"));
 
-                    b.Property<string>("Assignee")
+                    b.Property<string>("AssigneeFirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AssigneeLastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -266,7 +270,7 @@ namespace Bug_Tracker.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeID")
+                    b.Property<int?>("TypeID")
                         .HasColumnType("int");
 
                     b.HasKey("TicketID");
@@ -499,9 +503,7 @@ namespace Bug_Tracker.Migrations
 
                     b.HasOne("Bug_Tracker.Models.IssueType", "IssueType")
                         .WithMany("Tickets")
-                        .HasForeignKey("TypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TypeID");
 
                     b.Navigation("IssueType");
 

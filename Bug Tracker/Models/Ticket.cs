@@ -12,7 +12,13 @@ namespace Bug_Tracker.Models
         [Required(ErrorMessage = "Please enter the ticket name")]
         public string TicketName { get; set; }
 
-		public string Assignee { get; set; }
+		[DisplayName("Assignee FirstName")]
+		[Required(ErrorMessage = "Please enter the Assignee FirstName")]
+		public string AssigneeFirstName { get; set; }
+
+		[DisplayName("Assignee LastName")]
+		[Required(ErrorMessage = "Please enter the Assignee LastName")]
+		public string AssigneeLastName { get; set; }
 
 		[DisplayName("Ticket Description")]
         [Required(ErrorMessage = "Please enter the description")]
@@ -33,10 +39,10 @@ namespace Bug_Tracker.Models
         public int PriorityID { get; set; }
 		public int IssueTypeID { get; set; }
 
-		public Project Project { get; set; }
-		public Status Status { get; set; }
-		public Priority Priority { get; set; }
-		public IssueType IssueType { get; set; }
+		public Project? Project { get; set; }
+		public Status? Status { get; set; }
+		public Priority? Priority { get; set; }
+		public IssueType? IssueType { get; set; }
 
 
 		[ForeignKey("TicketID")]

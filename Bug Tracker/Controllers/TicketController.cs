@@ -39,5 +39,23 @@ namespace Bug_Tracker.Controllers
             return View(ticket);
         }
 
-    }
+        [HttpPost]
+		public async Task<IActionResult> CreateTicket(string FirstName, string LastName, Ticket ticket, string chosenPriority, string chosenIssueType)
+        {
+
+            if(ModelState.IsValid)
+            {
+
+            }
+
+			ViewBag.Priorities = wrapper.Priority.GetAllItems();
+			ViewBag.IssueTypes = wrapper.IssueType.GetAllItems();
+
+
+			return View(ticket);
+
+        }
+
+
+	}
 }
