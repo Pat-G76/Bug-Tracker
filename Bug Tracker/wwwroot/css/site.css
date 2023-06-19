@@ -1,0 +1,29 @@
+
+table#users th {
+   margin: 20px;
+   text-align:left;
+}
+
+#my_user_details ul {
+    list-style: none;
+    display: table;
+    line-height: 50px;
+}
+
+li {
+    display: table-row;
+}
+
+
+b {
+    display: table-cell;
+    padding-right: 1em;
+}
+
+table#UserList td {
+    vertical-align: middle;
+}
+
+table#UserList h4 {
+    margin: 2rem 0rem 1rem;
+}

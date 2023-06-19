@@ -1,0 +1,32 @@
+﻿@model IdentityRole
+
+@{
+	ViewBag.Title = ViewBag.Changes;
+}
+
+
+<h2 class="text-center my-5">@ViewBag.Changes Role</h2>
+
+<div class="d-flex justify-content-center" style="margin-top: 10vh;">
+
+	<form method="post" asp-action="EditRole">
+
+		<input name="Id" value="@Model.Id" type="hidden"/>
+
+		<div class="form-group">
+			<label asp-for="Name"></label>
+			<input class="form-control mt-2" asp-for="Name"/>
+
+		</div>
+
+		<div asp-validation-summary="All" class="text-danger"></div>
+
+		<br />
+
+		<button class="btn btn-primary" type="submit">@ViewBag.Changes</button>
+		
+	</form>
+
+
+</div>
+	

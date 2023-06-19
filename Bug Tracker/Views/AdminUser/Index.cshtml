@@ -1,0 +1,104 @@
+﻿@model UserListModel
+
+@{
+
+	ViewData["Title"] = "Users";
+}
+
+
+<form method="get" asp-action="Index">
+
+	<div class="row mt-3 mb-2">
+
+		<div class="col">
+
+			<input value="@ViewBag.searchString" placeholder="Name of user" name="searchString" />
+			<button type="submit"> Search </button>
+
+		</div>
+
+		<div class="col">
+
+			<label for="cars">Start with employees in role : </label>
+			<select name="role" id="cars" >
+				@foreach(string role in Model.allRoles)
+				{										
+					<option value="@role">@role</option>					
+				}
+				
+			</select>
+
+		</div>
+		
+	</div>
+</form>
+
+
+<table class="table" id="UserList">
+
+	<thead>
+
+		<tr>
+
+			<th>UserName</th>
+			<th>Full Names</th>
+			<th>Roles</th>
+			<th></th>
+		</tr>		
+
+	</thead>
+
+	<tbody>
+
+			@foreach (Employee em in Model.Users)
+			{
+
+				<tr class="text-danger-emphasis">
+
+						<td>@em.UserName</td>
+						<td>
+							@em.FirstName - @em.LastName
+						</td>					
+						<td>@Model.userRoles[em.UserName]</td>
+						<td style="padding-right: 3rem;">
+							<form method="post" asp-action="DeleteUser">
+
+								<a class="btn btn-success" asp-action="UserDetails" type="button" asp-route-id="@em.Id" style="text-decoration: none">
+									<i class="far fa-eye"></i>
+								</a>
+
+								<a class="btn btn-primary" asp-action="EditUserDetails" type="button" asp-route-id="@em.Id">
+									<i class="fas fa-edit"></i>
+								</a>
+
+							
+
+								<button asp-action="DeleteUser" style="text-decoration: none" class="btn btn-danger" value=" Delete" type="submit"
+										onclick="return confirm('Are you sure you want to delete @em.UserName ?')"
+										asp-route-id="@em.Id">
+
+									<i class="far fa-trash-alt"></i>
+
+								</button>
+
+							</form>
+							
+						</td>
+				</tr>				
+			}
+
+	</tbody>
+
+
+</table>
+
+<div page-model="@Model.pageInfo" page-action="Index" 
+	 page-search="@ViewBag.searchString"
+	 page-sort-by="@ViewBag.role"
+	 page-classes-enabled="true" 
+	 page-class="btn" 
+	 page-class-normal="btn-outline-primary" 
+	 page-class-selected="btn-primary"
+	 class="btn-group pull-right m-1">
+
+</div>

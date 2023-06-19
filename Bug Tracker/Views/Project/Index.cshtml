@@ -1,0 +1,85 @@
+﻿@model ProjectList
+
+@{
+	ViewBag.Title = "Projects";
+}
+
+<div class="text-end">
+	<a asp-action="CreateProject" class="my-5 btn btn-primary">Create</a>
+</div>
+
+
+<form method="get" asp-action="Index" asp-route-page="@Model.pageInfo.CurrentPage" asp-route-sortBy="@ViewBag.Filter">
+
+	<div class="mt-3 mb-2">
+
+			<input placeholder="Project Name" name="searchString" />
+			<button type="submit"> Search </button>
+
+	</div>
+</form>
+
+
+<table class="table" id="UserList">
+
+	<thead>
+
+		<tr>
+
+			<th>ProjectID</th>
+			<th>
+				<a asp-action="Index" asp-route-sortBy="@ViewBag.NameSort" asp-route-searchString="@ViewBag.searchString">
+					Project Name
+				</a>
+			</th>
+			<th>Project Description</th>
+			<th>
+				<a asp-action="Index" asp-route-sortBy="@ViewBag.TimeSort" asp-route-searchString="@ViewBag.searchString">
+					Creation Date
+				</a>
+			</th>
+			<th></th>
+		</tr>
+
+	</thead>
+
+	<tbody>
+
+		@foreach (Project project in Model.projects)
+		{
+
+			<tr class="text-danger-emphasis">
+
+				<td>@project.ProjectID</td>
+				<td>
+					@project.ProjectName
+				</td>
+				<td>@project.ProjectDescription</td>
+				<td>@project.TimeCreated</td>
+				<td>
+					
+					@if (User.IsInRole("administrator"))
+					{
+						<a class="btn btn-primary" asp-action="EditProject" asp-route-id="@project.ProjectID">
+							<i class="fas fa-edit"></i>
+						</a>
+					}
+
+				</td>
+			</tr>
+		}
+
+	</tbody>
+
+
+</table>
+
+<div page-model="@Model.pageInfo" page-action="Index"
+	 page-search="@ViewBag.searchString"
+	 page-sort-by="@ViewBag.Filter"
+	 page-classes-enabled="true"
+	 page-class="btn"
+	 page-class-normal="btn-outline-primary"
+	 page-class-selected="btn-primary"
+	 class="btn-group pull-right m-1">
+</div>

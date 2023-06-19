@@ -1,0 +1,78 @@
+﻿@model ProjectEmpoloyeeList
+
+@{
+	ViewBag.Title = "Add Employee To Project";
+}
+
+
+<h2 class="text-center" style="margin-top: 100px; margin-bottom: 100px;">Add Employees to ( @Model.project.ProjectName ) Project</h2>
+
+
+
+
+<form method="post" asp-action="Index" asp-route-id="@Model.project.ProjectID">
+
+	<div class="text-danger m-0 p-0" asp-validation-summary="All"></div>
+
+	<input style="padding-top: 2px; padding-bottom: 6px;" type="text" name="fullName" size="30" list="userList" placeholder="FirstName (space) LastName" />
+
+
+	<datalist id="userList">
+
+		@foreach (string name in Model.searchNames)
+		{
+			<option>@name</option>
+
+		}
+
+	</datalist>
+
+
+	<button type="submit" class="btn btn-outline-primary">Add Employee</button>
+					
+	
+</form>
+
+
+<table class="table table-responsive mt-5" id="UserList">
+
+	<thead>
+
+		<tr>
+
+			<th>FirstName</th>
+			<th>LastName</th>
+			<th>UserName</th>
+			<th>Email</th>
+			<th></th>
+		</tr>
+
+	</thead>
+
+	<tbody>
+
+		@foreach (Employee em in Model.employees)
+		{
+
+			<tr class="text-danger-emphasis">
+
+				<td>@em.FirstName</td>
+				<td>@em.LastName</td>
+				<td>@em.UserName </td>
+				<td>@em.Email</td>
+				<td>
+
+					<a class="btn btn-success" asp-controller="AdminUser" asp-action="UserDetails" type="button" asp-route-id="@em.Id" style="text-decoration: none">
+						<i class="far fa-eye"></i>
+					</a>
+
+				</td>
+				
+				
+			</tr>
+		}
+
+	</tbody>
+
+
+</table>

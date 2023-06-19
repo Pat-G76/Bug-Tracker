@@ -1,0 +1,122 @@
+﻿@model UserInformation
+
+@{
+	ViewBag.Title = "User details";
+}
+
+
+<div class="row mt-5">
+
+	<div class="col-md-4 mb-5 mt-4 text-center">
+
+		<i class="fa-regular fa-user" style="font-size: 230px;"></i>
+
+	</div>
+
+	<div class="col-md-6" id="my_user_details">
+			
+		<ul>
+
+			<li style="font-size: 18px; font-weight: bold; margin-left: 2rem;"> User Details </li>
+
+			<li>
+				<b> Full Names </b> : &nbsp; &nbsp;
+				@Model.employee.FirstName &nbsp; @Model.employee.LastName
+			</li>
+
+
+			<li>
+				<b> Username </b> : &nbsp; &nbsp;
+				@Model.employee.UserName
+			</li>
+
+
+
+
+			<li>
+				<b> Phone Number </b> : &nbsp; &nbsp;
+				<a href="tel: @Model.employee.PhoneNumber " style="text-decoration: none"> @Model.employee.PhoneNumber</a>
+				
+
+			</li>
+
+
+
+
+			<li>
+				<b> Email </b> : &nbsp; &nbsp;
+				<a href="mailto: @Model.employee.Email" style="text-decoration: none"> @Model.employee.Email</a>
+				
+			</li>
+
+			<li>
+				<b> Date Captured </b> : &nbsp; &nbsp;
+				@Model.employee.DateCaptured
+
+			</li>
+
+			<li>
+				<b> Roles in </b> : &nbsp; &nbsp;
+				@(string.Join(", ", Model.roleNames))
+
+			</li>
+
+
+		</ul>
+
+
+	</div>
+
+@*	<div class="col-md-1" id="my_user_details">
+		<a asp-action="Edit" asp-route-id="@Model.employee.Id" class="btn btn-primary">Edit</a>
+	</div>*@
+		
+
+</div>
+
+	
+
+<table class="table mt-5">
+
+	<thead>
+
+		<tr>
+
+			<th> Project Name </th>
+			<th> Project Description </th>
+			<th> Project Ticket Names </th>
+
+		</tr>
+
+	</thead>
+
+	<tbody>
+
+		@foreach(var item in Model.ProjectWithTickets)
+		{
+			<tr>
+
+				<td>@item.Key.ProjectName</td>
+				<td>@item.Key.ProjectDescription</td>
+				<td>
+
+					<ul>
+
+						@foreach(var ticket in item.Value)
+						{						
+
+							<li> @ticket.TicketName </li>
+						
+						}
+
+					</ul>
+
+				</td>
+
+			</tr>
+		}
+
+	</tbody>
+
+
+</table>

@@ -1,0 +1,82 @@
+﻿@model UserUpdateModel
+
+
+@{
+	ViewBag.Title = "Update User";
+}
+
+<div class="d-flex justify-content-center" style="margin-top: 10vh;">	
+
+	<form method="post" asp-action="EditUserDetails">
+
+		<h2 class="text-center mb-2">Update @Model.UserName Details</h2>
+
+		<div class="form-group">
+			
+			<input type="hidden" asp-for="UserName" />
+
+			<div class="row">
+				<div class="col">
+					<label asp-for="FirstName"></label>
+					<input class="form-control" asp-for="FirstName" />
+					<span class="text-danger" asp-validation-for="FirstName"></span>
+				</div>
+
+				<div class="col">
+					<label asp-for="LastName"></label>
+					<input class="form-control" asp-for="LastName" />
+					<span class="text-danger" asp-validation-for="LastName"></span>
+					<br />
+				</div>
+
+			</div>
+
+		</div>
+
+		
+		<div class="form-group">
+			<label asp-for="Email"></label>
+			<input class="form-control" asp-for="Email" />
+			<span class="text-danger" asp-validation-for="Email"></span>
+			<br />
+		</div>
+
+		<div class="form-group">
+			<label asp-for="PhoneNumber"></label>
+			<input class="form-control" asp-for="PhoneNumber" />
+			<span class="text-danger" asp-validation-for="PhoneNumber"></span>
+			<br />
+		</div>
+
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input name="password" class="form-control" />
+		</div>
+
+		<label>Roles</label>
+
+		<div class="row">
+			@foreach (string role in Model.allRoles)
+			{
+				<div class="form-check col">
+
+					<input type="checkbox" class="form-check-input" name="allRoles" @(Model.userRoles.Contains(role) ? "checked" : "") value="@role">
+					<label class="form-check-label">@role</label>
+
+				</div>
+
+			}
+
+		</div>
+
+		<br />
+
+		<div asp-validation-summary="All" class="text-danger"></div>
+
+		
+		<button class="btn btn-primary" type="submit">Update</button>			
+		
+
+	</form>
+
+</div>

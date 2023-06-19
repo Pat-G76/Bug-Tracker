@@ -1,0 +1,47 @@
+﻿@model LoginModel
+
+@{
+	ViewData["Title"] = "Login";
+}
+
+
+<div class="d-flex justify-content-center" style="margin-top: 15vh;">
+
+	
+	<form method="post" asp-controller="Account" asp-action="Login">
+
+		<h2 class="text-center" style="margin-bottom: 12vh;">Login</h2>
+
+
+		<div class="text-danger" asp-validation-summary="All" style="list-style-type:none;"></div>
+
+		<div class="row">
+
+			<div class="form-group">
+				<label asp-for="UserName"></label>
+				<input class="form-control" asp-for="UserName" />
+				@*<span class="text-danger" asp-validation-for="UserName"></span>*@
+				<br />
+			</div>
+
+			
+
+			<div class="form-group">
+				<label asp-for="Password"></label>
+				<input class="form-control" asp-for="Password" />
+				@*<span class="text-danger" asp-validation-for="Password"></span>*@
+			</div>
+
+		</div>
+
+		<br />
+		<span>
+			<button class="btn btn-primary" type="submit">Login</button>
+			<a asp-action="Register">Register</a>
+		</span>
+
+	</form>
+	
+</div>
+
+

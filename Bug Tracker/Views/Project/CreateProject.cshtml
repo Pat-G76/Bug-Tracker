@@ -1,0 +1,48 @@
+﻿@model Project
+
+@{
+	ViewData["Title"] = ViewBag.Request + "Project";
+}
+
+
+<div class="d-flex justify-content-center" style="margin-top: 15vh;">
+
+
+	<form method="post" asp-controller="Project" asp-action="CreateProject">
+
+		<h2 class="text-center" style="margin-bottom: 12vh;">@ViewBag.Request Project</h2>
+
+
+		<input asp-for="TimeCreated" type="hidden"/>
+		<input asp-for="ProjectID" type="hidden" />
+
+
+		<div class="row">
+
+			<div class="form-group">
+				<label asp-for="ProjectName"></label>
+				<input class="form-control" asp-for="ProjectName" />
+				<span class="text-danger" asp-validation-for="ProjectName"></span>
+				<br />
+			</div>
+
+
+
+			<div class="form-group">
+				<label asp-for="ProjectDescription"></label>
+				<input class="form-control" asp-for="ProjectDescription" />
+				<span class="text-danger" asp-validation-for="ProjectDescription"></span>
+			</div>
+
+		</div>
+
+		<br />
+		
+		<button class="btn btn-primary" type="submit">@ViewBag.Request</button>
+		
+
+	</form>
+
+</div>
+
+
