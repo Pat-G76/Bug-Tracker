@@ -89,7 +89,7 @@ namespace Bug_Tracker.Controllers
                 ModelState.AddModelError("", "You cannot add a due date that already passed");
 
 
-			Employee assignee = string.IsNullOrEmpty(ticket.AssigneeFirstName) && string.IsNullOrEmpty(ticket.AssigneeLastName) ? null : userManager.Users.FirstOrDefault(e => e.FirstName.ToLower() == ticket.AssigneeFirstName.ToLower() && e.LastName.ToLower() == ticket.AssigneeLastName.ToLower());
+			Employee assignee = string.IsNullOrEmpty(ticket.AssigneeFirstName) || string.IsNullOrEmpty(ticket.AssigneeLastName) ? null : userManager.Users.FirstOrDefault(e => e.FirstName.ToLower() == ticket.AssigneeFirstName.ToLower() && e.LastName.ToLower() == ticket.AssigneeLastName.ToLower());
 
 			if (assignee != null)
             {
