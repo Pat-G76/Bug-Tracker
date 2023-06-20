@@ -6,10 +6,10 @@
 }
 
 
-<h2 class="m-5">@ViewBag.Changes Ticket</h2>
+<h2 class="m-5 text-center">@ViewBag.Changes Ticket for @ViewData["ProjectName"]</h2>
 
 
-<div class="d-flex justify-content-center" style="margin-top: 15vh;">	
+<div class="d-flex justify-content-center">	
 
 	<form method="post" asp-action="CreateTicket" id="CreateTicketForm">
 
@@ -17,6 +17,10 @@
 
 		<input asp-for="ProjectID" type="hidden" />
 		<input asp-for="EmployeeId" type="hidden" />
+		<input asp-for="TicketID" type="hidden" />
+		<input asp-for="PriorityID" type="hidden" />
+		<input asp-for="IssueTypeID" type="hidden" />
+		
 
 		<div class="form-group">
 			<label asp-for="TicketName"></label>

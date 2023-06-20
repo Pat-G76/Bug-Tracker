@@ -45,9 +45,10 @@ namespace Bug_Tracker.Controllers
             else if( !await userManager.IsInRoleAsync(employee, "administrator") && !IsInProject(employee, id) )
             {
 				return NotFound();
-			}            
+			}
 
 
+			ViewData["ProjectName"] = wrapper.Project.GetById(id).ProjectName;
 			ViewBag.Changes = "Create";
 			ViewBag.Priorities = wrapper.Priority.GetAllItems();
             ViewBag.IssueTypes = wrapper.IssueType.GetAllItems();
@@ -71,7 +72,7 @@ namespace Bug_Tracker.Controllers
 				return NotFound();
 			}
 
-
+            ViewData["ProjectName"] = wrapper.Project.GetById( ticket.ProjectID );
 			ViewBag.Changes = "Update";
 			ViewBag.Priorities = wrapper.Priority.GetAllItems();
 			ViewBag.IssueTypes = wrapper.IssueType.GetAllItems();
@@ -139,11 +140,12 @@ namespace Bug_Tracker.Controllers
 
 				}
 
-				return RedirectToAction("Index");
+				return RedirectToAction("Index", "Project");
 
 			}
 
-            ViewBag.Changes = ticket.TicketID == 0 ? "Create" : "Update";
+			ViewData["ProjectName"] = wrapper.Project.GetById(ticket.ProjectID).ProjectName;
+			ViewBag.Changes = ticket.TicketID == 0 ? "Create" : "Update";
 
 			ViewBag.Priorities = wrapper.Priority.GetAllItems();
 			ViewBag.IssueTypes = wrapper.IssueType.GetAllItems();
