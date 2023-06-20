@@ -82,14 +82,15 @@ namespace Bug_Tracker.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateTicket(Ticket ticket, int chosenPriority, int chosenIssueType)
+		public IActionResult CreateTicket(Ticket ticket, int chosenPriority, int chosenIssueType)
         {
 
             if(ticket.DueDate < DateTime.Now)
                 ModelState.AddModelError("", "You cannot add a due date that already passed");
 
 
-			Employee assignee = string.IsNullOrEmpty(ticket.AssigneeFirstName) || string.IsNullOrEmpty(ticket.AssigneeLastName) ? null : userManager.Users.FirstOrDefault(e => e.FirstName.ToLower() == ticket.AssigneeFirstName.ToLower() && e.LastName.ToLower() == ticket.AssigneeLastName.ToLower());
+			Employee assignee = string.IsNullOrEmpty(ticket.AssigneeFirstName) || string.IsNullOrEmpty(ticket.AssigneeLastName) ? null : 
+                                userManager.Users.FirstOrDefault(e => e.FirstName.ToLower() == ticket.AssigneeFirstName.Trim().ToLower() && e.LastName.ToLower() == ticket.AssigneeLastName.Trim().ToLower());
 
 			if (assignee != null)
             {
@@ -98,6 +99,11 @@ namespace Bug_Tracker.Controllers
                 {
                     ModelState.AddModelError("", "The assignee is not in the project. Talk to the administrator");
                 }                
+                else
+                {
+                    ticket.AssigneeFirstName = assignee.FirstName;
+                    ticket.AssigneeLastName = assignee.LastName;
+                }
 
 			}
 			else
