@@ -60,17 +60,23 @@ namespace Bug_Tracker.Data
             context.SaveChanges();
 
         }
-		
+
+		private static readonly List<Employee> SeedUsers = new()
+		{
+		   new Employee {UserName = "Admin", FirstName = "Patrick", LastName = "Smith", Email = "admin@gmail.com", PhoneNumber = "066 883 5545", DateCaptured = DateTime.Now},
+		   new Employee {UserName = "putswane", FirstName = "Jonas", LastName = "Maredi", Email = "jonny@gmail.com", PhoneNumber = "066 563 3465", DateCaptured = DateTime.Now},
+		   new Employee {UserName = "comedy404", FirstName = "Piet", LastName = "Mashao", Email = "piet@gmail.com", PhoneNumber = "066 563 1225", DateCaptured = DateTime.Now},
+		   new Employee {UserName = "psycho69", FirstName = "Patrick", LastName = "Bateman", Email = "paul@gmail.com", PhoneNumber = "066 563 5165", DateCaptured = DateTime.Now},
+		   new Employee {UserName = "healer", FirstName = "Freddy", LastName = "Johnson", Email = "freddy@gmail.com", PhoneNumber = "063 563 6565", DateCaptured = DateTime.Now},
+		   new Employee {UserName = "joy66", FirstName = "Betty", LastName = "Maredi", Email = "betty@gmail.com", PhoneNumber = "066 654 5665", DateCaptured = DateTime.Now}
+		};
+
 		public static async void CreateAdminUser(IApplicationBuilder app)
         {
-			const string adminUserName = "Admin";
-			const string adminfirstName = "Patrick";
-			const string adminlastName = "Malapane";
-			const string adminPassword = "Secret123$";
-			const string adminEmail = "admin@gmail.com";
-			const string adminCellphone = "066 563 5665";
-			const string adminRole = "administrator";
-			const string employeesRole = "developer";
+
+
+			string adminRole = "administrator";
+			string employeesRole = "developer";
 
 
 			UserManager<Employee> userManager = app.ApplicationServices
@@ -81,34 +87,30 @@ namespace Bug_Tracker.Data
                 .CreateScope().ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
 
-            if (await roleManager.FindByNameAsync(adminRole) == null)
+            if (await roleManager.FindByNameAsync(adminRole) == null)         
+                await roleManager.CreateAsync(new IdentityRole(adminRole));		
+			
+			
+			if (await roleManager.FindByNameAsync(employeesRole) == null)
+				await roleManager.CreateAsync(new IdentityRole(employeesRole));
+
+
+            if (userManager.Users == null)
             {
 
-                await roleManager.CreateAsync(new IdentityRole(adminRole));
-                await roleManager.CreateAsync(new IdentityRole(employeesRole));				
-			}
+				foreach (Employee employee in SeedUsers)
+				{
 
-			Employee user = new Employee
-            {
-                FirstName = adminfirstName,
-                LastName = adminlastName,
-                Email = adminEmail,
-                UserName = adminUserName,
-                PhoneNumber = adminCellphone,
-                DateCaptured = DateTime.Now
-            };
+					IdentityResult result = await userManager.CreateAsync(employee, employee.FirstName + "123$");
 
-            if (await userManager.FindByNameAsync(adminUserName) == null)
-            {
+					if (result.Succeeded)
+					{
+						await userManager.AddToRoleAsync(employee, adminRole);
+					}
 
-                IdentityResult result = await userManager.CreateAsync(user, adminPassword);
+					adminRole = employeesRole;
 
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, adminRole);
-                }
-
-
+				}
             }
 
         }
