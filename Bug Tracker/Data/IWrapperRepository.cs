@@ -8,7 +8,6 @@
         ITicketRepository Ticket { get; }
 		IStatusRepository Status { get; }
         IPriorityRepository Priority { get; }
-		IEmployeeTicketRepository EmployeeTicket { get; }
         IProjectEmployeeRepository ProjectEmployee { get; }
         IIssueTypeRepository IssueType { get; }
 

@@ -40,8 +40,12 @@ namespace Bug_Tracker.Controllers
         }
 
         [HttpPost]
-		public async Task<IActionResult> CreateTicket(string FirstName, string LastName, Ticket ticket, string chosenPriority, string chosenIssueType)
+		public async Task<IActionResult> CreateTicket(Ticket ticket, string chosenPriority, string chosenIssueType)
         {
+
+            if(ticket.DueDate < DateTime.Now)
+                ModelState.AddModelError("", "You cannot add a due date that already passed");
+
 
             if(ModelState.IsValid)
             {

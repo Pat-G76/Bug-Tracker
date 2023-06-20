@@ -98,9 +98,13 @@ namespace Bug_Tracker.Data
             return dbContext.Set<Employee>().Include(e => e.ProjectEmployees).ThenInclude(e => e.Project).First(e => e.Id == id);
         }
 
-        public IEnumerable<Employee> GetEmployeeWithTickets(string id)
-        {
-            return dbContext.Set<Employee>().Include(e => e.EmployeeTickets).ThenInclude(e => e.Ticket).Where(e => e.Id == id);
-        }
+        //public IEnumerable<Employee> GetEmployeeWithTickets(string id)
+        //{
+
+
+
+
+        //    return dbContext.Set<Employee>().Include(e => e.EmployeeTickets).ThenInclude(e => e.Ticket).Where(e => e.Id == id);
+        //}
 	}
 }

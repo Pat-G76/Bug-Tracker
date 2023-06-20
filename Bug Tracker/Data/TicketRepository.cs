@@ -18,7 +18,7 @@ namespace Bug_Tracker.Data
 
 		public IEnumerable<Ticket> GetTicketsForEmployee(string id)
 		{
-            return dbContext.Tickets.Include(c => c.EmployeeTickets).ThenInclude(te => te.EmployeeId == id);
+            return dbContext.Tickets.Where(t => t.EmployeeId == id);
 		}
 
 	}

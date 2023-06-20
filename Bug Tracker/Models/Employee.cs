@@ -25,7 +25,7 @@ namespace Bug_Tracker.Models
 		public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
 
 		[ForeignKey("EmployeeId")]
-		public ICollection<EmployeeTicket> EmployeeTickets { get; set; }      
+		public List<Ticket> Tickets { get; set; }
 
-    }
+	}
 }

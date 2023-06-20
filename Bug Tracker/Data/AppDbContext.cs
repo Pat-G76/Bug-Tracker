@@ -13,7 +13,6 @@ namespace Bug_Tracker.Data
 
         public DbSet<Comment> Comments { get; set; }
         //public DbSet<EmployeeRepository> Employees { get; set; }
-        public DbSet<EmployeeTicket> EmployeeTickets { get; set; }
         public DbSet<Project> Projects { get; set; }
 		public DbSet<Status> Statuses { get; set; }
 		public DbSet<Priority> Priorities { get; set; }
@@ -31,7 +30,6 @@ namespace Bug_Tracker.Data
 			modelBuilder.Entity<Status>().ToTable("Status");
 			modelBuilder.Entity<IssueType>().ToTable("IssueType");
 			modelBuilder.Entity<Priority>().ToTable("Priority");
-			modelBuilder.Entity<EmployeeTicket>().ToTable("EmployeeTicket");
             modelBuilder.Entity<Project>().ToTable("Project");
             modelBuilder.Entity<ProjectEmployee>().ToTable("ProjectEmployee");
             modelBuilder.Entity<Ticket>().ToTable("Ticket");

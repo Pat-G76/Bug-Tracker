@@ -11,7 +11,6 @@ namespace Bug_Tracker.Data
         private TicketRepository _ticket;
 		private PriorityRepository _priority;
 		private StatusRepository _status;
-		private EmployeeTicketRepository _employee_ticket;
         private ProjectEmployeeRepository _project_employee;
         private IssueTypeRepository _issueType;
         
@@ -76,20 +75,6 @@ namespace Bug_Tracker.Data
 
                 return _ticket;
             }
-        }
-
-		public IEmployeeTicketRepository EmployeeTicket
-        {
-            get
-            {
-                if(_employee_ticket == null)
-                {
-					_employee_ticket = new EmployeeTicketRepository(dbContext);
-                }
-
-                return _employee_ticket;
-
-			}
         }
 
 		public IProjectEmployeeRepository ProjectEmployee

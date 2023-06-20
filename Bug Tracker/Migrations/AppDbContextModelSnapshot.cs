@@ -129,30 +129,6 @@ namespace Bug_Tracker.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Bug_Tracker.Models.EmployeeTicket", b =>
-                {
-                    b.Property<int>("EmployeeTicketID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeTicketID"));
-
-                    b.Property<string>("EmployeeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("TicketID")
-                        .HasColumnType("int");
-
-                    b.HasKey("EmployeeTicketID");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("TicketID");
-
-                    b.ToTable("EmployeeTicket", (string)null);
-                });
-
             modelBuilder.Entity("Bug_Tracker.Models.IssueType", b =>
                 {
                     b.Property<int>("IssueTypeID")
@@ -247,6 +223,10 @@ namespace Bug_Tracker.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("EmployeeId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("IssueTypeID")
                         .HasColumnType("int");
 
@@ -274,6 +254,8 @@ namespace Bug_Tracker.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("TicketID");
+
+                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("PriorityID");
 
@@ -462,27 +444,14 @@ namespace Bug_Tracker.Migrations
                     b.Navigation("Project");
                 });
 
-            modelBuilder.Entity("Bug_Tracker.Models.EmployeeTicket", b =>
+            modelBuilder.Entity("Bug_Tracker.Models.Ticket", b =>
                 {
                     b.HasOne("Bug_Tracker.Models.Employee", "Employee")
-                        .WithMany("EmployeeTickets")
+                        .WithMany("Tickets")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Bug_Tracker.Models.Ticket", "Ticket")
-                        .WithMany("EmployeeTickets")
-                        .HasForeignKey("TicketID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("Ticket");
-                });
-
-            modelBuilder.Entity("Bug_Tracker.Models.Ticket", b =>
-                {
                     b.HasOne("Bug_Tracker.Models.Priority", "Priority")
                         .WithMany("Tickets")
                         .HasForeignKey("PriorityID")
@@ -504,6 +473,8 @@ namespace Bug_Tracker.Migrations
                     b.HasOne("Bug_Tracker.Models.IssueType", "IssueType")
                         .WithMany("Tickets")
                         .HasForeignKey("TypeID");
+
+                    b.Navigation("Employee");
 
                     b.Navigation("IssueType");
 
@@ -588,9 +559,9 @@ namespace Bug_Tracker.Migrations
                 {
                     b.Navigation("Comments");
 
-                    b.Navigation("EmployeeTickets");
-
                     b.Navigation("ProjectEmployees");
+
+                    b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("Bug_Tracker.Models.IssueType", b =>
@@ -615,11 +586,6 @@ namespace Bug_Tracker.Migrations
             modelBuilder.Entity("Bug_Tracker.Models.Status", b =>
                 {
                     b.Navigation("Tickets");
-                });
-
-            modelBuilder.Entity("Bug_Tracker.Models.Ticket", b =>
-                {
-                    b.Navigation("EmployeeTickets");
                 });
 #pragma warning restore 612, 618
         }

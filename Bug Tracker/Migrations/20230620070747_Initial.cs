@@ -284,11 +284,18 @@ namespace Bug_Tracker.Migrations
                     StatusID = table.Column<int>(type: "int", nullable: false),
                     PriorityID = table.Column<int>(type: "int", nullable: false),
                     IssueTypeID = table.Column<int>(type: "int", nullable: false),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TypeID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ticket", x => x.TicketID);
+                    table.ForeignKey(
+                        name: "FK_Ticket_AspNetUsers_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ticket_IssueType_TypeID",
                         column: x => x.TypeID,
@@ -311,32 +318,6 @@ namespace Bug_Tracker.Migrations
                         column: x => x.StatusID,
                         principalTable: "Status",
                         principalColumn: "StatusID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EmployeeTicket",
-                columns: table => new
-                {
-                    EmployeeTicketID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TicketID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmployeeTicket", x => x.EmployeeTicketID);
-                    table.ForeignKey(
-                        name: "FK_EmployeeTicket_AspNetUsers_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EmployeeTicket_Ticket_TicketID",
-                        column: x => x.TicketID,
-                        principalTable: "Ticket",
-                        principalColumn: "TicketID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -390,16 +371,6 @@ namespace Bug_Tracker.Migrations
                 column: "ProjectID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeTicket_EmployeeId",
-                table: "EmployeeTicket",
-                column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EmployeeTicket_TicketID",
-                table: "EmployeeTicket",
-                column: "TicketID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProjectEmployee_EmployeeId",
                 table: "ProjectEmployee",
                 column: "EmployeeId");
@@ -408,6 +379,11 @@ namespace Bug_Tracker.Migrations
                 name: "IX_ProjectEmployee_ProjectID",
                 table: "ProjectEmployee",
                 column: "ProjectID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ticket_EmployeeId",
+                table: "Ticket",
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ticket_PriorityID",
@@ -452,16 +428,13 @@ namespace Bug_Tracker.Migrations
                 name: "Comment");
 
             migrationBuilder.DropTable(
-                name: "EmployeeTicket");
-
-            migrationBuilder.DropTable(
                 name: "ProjectEmployee");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Ticket");
 
             migrationBuilder.DropTable(
-                name: "Ticket");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

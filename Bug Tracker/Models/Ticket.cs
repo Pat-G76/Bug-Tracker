@@ -38,15 +38,14 @@ namespace Bug_Tracker.Models
 		public int StatusID { get; set; }
         public int PriorityID { get; set; }
 		public int IssueTypeID { get; set; }
+		public string EmployeeId { get; set; }
 
 		public Project? Project { get; set; }
 		public Status? Status { get; set; }
 		public Priority? Priority { get; set; }
 		public IssueType? IssueType { get; set; }
+		public Employee? Employee { get; set; }
 
-
-		[ForeignKey("TicketID")]
-		public ICollection<EmployeeTicket>? EmployeeTickets { get; set; }
         
     }
 }
