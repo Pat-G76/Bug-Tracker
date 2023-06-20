@@ -29,7 +29,8 @@ namespace Bug_Tracker.Controllers
         public IActionResult CreateTicket(int id)
         {
 
-            ViewBag.Priorities = wrapper.Priority.GetAllItems();
+			ViewBag.Changes = "Create";
+			ViewBag.Priorities = wrapper.Priority.GetAllItems();
             ViewBag.IssueTypes = wrapper.IssueType.GetAllItems();
 
             Ticket ticket = new Ticket();
@@ -39,8 +40,28 @@ namespace Bug_Tracker.Controllers
             return View(ticket);
         }
 
-        [HttpPost]
-		public async Task<IActionResult> CreateTicket(Ticket ticket, string chosenPriority, string chosenIssueType)
+		public IActionResult UpdateTicket(int id)
+		{
+
+
+            Ticket ticket = wrapper.Ticket.GetById(id);
+
+            if(ticket == null)
+            {
+                return NotFound();
+            }
+
+
+            ViewBag.Changes = "Update";
+			ViewBag.Priorities = wrapper.Priority.GetAllItems();
+			ViewBag.IssueTypes = wrapper.IssueType.GetAllItems();
+
+			return View("CreateTicket", ticket);
+
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> CreateTicket(Ticket ticket, int chosenPriority, int chosenIssueType)
         {
 
             if(ticket.DueDate < DateTime.Now)
@@ -49,6 +70,20 @@ namespace Bug_Tracker.Controllers
 
             if(ModelState.IsValid)
             {
+
+                if(ticket.TicketID == 0)
+                {
+
+                    ticket.PriorityID = chosenPriority;
+                    ticket.IssueTypeID = chosenIssueType;
+                    ticket.Created = DateTime.Now;
+                    ticket.StatusID = wrapper.Status.GetByTitle("New").StatusID;
+
+                }
+                else
+                {
+
+                }
 
             }
 

@@ -38,7 +38,7 @@ namespace Bug_Tracker.Models
 		public int StatusID { get; set; }
         public int PriorityID { get; set; }
 		public int IssueTypeID { get; set; }
-		public string EmployeeId { get; set; }
+		public string? EmployeeId { get; set; }
 
 		public Project? Project { get; set; }
 		public Status? Status { get; set; }
