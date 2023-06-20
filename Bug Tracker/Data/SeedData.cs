@@ -87,21 +87,21 @@ namespace Bug_Tracker.Data
                 .CreateScope().ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
 
-            if (await roleManager.FindByNameAsync(adminRole) == null)         
+            if (!await roleManager.RoleExistsAsync(adminRole))         
                 await roleManager.CreateAsync(new IdentityRole(adminRole));		
 			
 			
-			if (await roleManager.FindByNameAsync(employeesRole) == null)
+			if (!await roleManager.RoleExistsAsync(employeesRole))
 				await roleManager.CreateAsync(new IdentityRole(employeesRole));
 
 
-            if (userManager.Users == null)
+            if (userManager.Users.Count() == 0)
             {
 
 				foreach (Employee employee in SeedUsers)
 				{
 
-					IdentityResult result = await userManager.CreateAsync(employee, employee.FirstName + "123$");
+					IdentityResult result = await userManager.CreateAsync(employee, "Secret123$");
 
 					if (result.Succeeded)
 					{
