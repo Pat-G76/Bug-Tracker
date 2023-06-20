@@ -2,11 +2,11 @@
 
 
 @{
-	ViewBag.Title = "Add Ticket";
+	ViewBag.Title = ViewBag.Changes + "Ticket";
 }
 
 
-<h2 class="m-5"></h2>
+<h2 class="m-5">@ViewBag.Changes Ticket</h2>
 
 
 <div class="d-flex justify-content-center" style="margin-top: 15vh;">	
@@ -16,6 +16,7 @@
 		<div asp-validation-summary="All" class="text-danger" style="list-style:circle;"></div>
 
 		<input asp-for="ProjectID" type="hidden" />
+		<input asp-for="EmployeeId" type="hidden" />
 
 		<div class="form-group">
 			<label asp-for="TicketName"></label>
@@ -60,7 +61,7 @@
 			@foreach(Priority priority in ViewBag.Priorities)
 			{
 				<div class="form-check col">
-					<input class="form-check-input" type="radio" name="chosenPriority" value="@priority.PriorityID" id="chosenPriority_@priority.PriorityID" @(priority.PriorityID == Model.PriorityID ? "checked" : "")>
+					<input required class="form-check-input" type="radio" name="chosenPriority" value="@priority.PriorityID" id="chosenPriority_@priority.PriorityID" @(priority.PriorityID == Model.PriorityID ? "checked" : "") >
 					<label class="form-check-label" for="chosenPriority_@priority.PriorityID">
 						@priority.PriorityLevel
 					</label>
@@ -77,7 +78,7 @@
 			@foreach (IssueType issueType in ViewBag.IssueTypes)
 			{
 				<div class="form-check col">
-					<input class="form-check-input" type="radio" name="chosenIssueType" value="@issueType.IssueTypeID" id="chosenIssueType_@issueType.IssueTypeID" @(issueType.IssueTypeID == Model.IssueTypeID ? "checked" : "")>
+					<input required class="form-check-input" type="radio" name="chosenIssueType" value="@issueType.IssueTypeID" id="chosenIssueType_@issueType.IssueTypeID" @(issueType.IssueTypeID == Model.IssueTypeID ? "checked" : "")>
 					<label class="form-check-label" for="chosenIssueType_@issueType.IssueTypeID">
 						@issueType.TypeTitle
 					</label>
@@ -87,7 +88,7 @@
 		</div>
 
 
-		<button class="btn btn-primary" type="submit">Create</button>
+		<button class="btn btn-primary" type="submit">@ViewBag.Changes</button>
 
 	</form>
 
