@@ -5,40 +5,78 @@
 }
 
 
-
-<h2 class="m-5"></h2>
-
-
-
-<div class="row flex-row flex-nowrap">
-
-	@foreach (var ticketInfo in Model.ticketsByStatus)
-	{
-
-		<div class="col-4">
-
-			<h4 class="fw-bold">@ticketInfo.Value</h4>
+@foreach (var ticketInfo in Model.ticketsByStatus)
+{
 
 
-			@foreach(var ticket in ticketInfo.Value)
-			{
+	<div class="mt-5">
+
+		
+		<table class="table">
+
+			<thead>
+
+				<tr>
+
+					<th width="2%">
+
+						<button type="button" class="btn btn-info" data-bs-toggle="collapse" data-bs-target="@("#collapse" + ticketInfo.Key)">
+							<i class="fa-solid fa-circle-"></i>
+						</button>
+
+					</th>
+					<th>@ticketInfo.Key</th>
+					<th>Created</th>
+					<th>Due</th>				
+					<th>Assignee</th>
+					<th>Reporter</th>
+					<th>Priority</th>
+					<th>Issue</th>
+
+				</tr>
+
+			</thead>
+
+			<tbody class="collapse" id="@("collapse" + ticketInfo.Key)">
+
+				@foreach(var ticket in ticketInfo.Value)
+				{
 				
-				<div class="border-2 rounded-3">
+					<tr>
 
-					<h5> @ticket.TicketID : @ticket.TicketName </h5>
+						<td>
+							
+
+						</td>
+
+						<td> @ticket.TicketName </td>
+
+						<td> @ticket.Created </td>
+
+						<td> @ticket.DueDate </td>
+
+						<td> @ticket.AssigneeFirstName @ticket.AssigneeLastName </td>
+
+						<td> @Model.employees.First(e => e.Id == ticket.EmployeeId).FirstName @Model.employees.First(e => e.Id == ticket.EmployeeId).LastName </td>
+
+						<td style="color:@Model.GetColor(ticket.PriorityID); font-weight:bold;"> @Model.priorities.First(p => p.PriorityID == ticket.PriorityID).PriorityLevel </td>
+
+						<td> @Model.issueTypes.First(i => i.IssueTypeID == ticket.IssueTypeID).TypeTitle </td>
+
+					</tr>
+
+				}
+
+
+			</tbody>
+
+		</table>
+
+	</div>
+
+
+}
 
 
 
-				</div>
-
-
-			}
-
-
-		</div>
-
-
-	}
-
-</div>
 

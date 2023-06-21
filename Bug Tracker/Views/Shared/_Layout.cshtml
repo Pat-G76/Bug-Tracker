@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <!--  Bootstrap -->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    
+    <link rel="stylesheet" asp-href-include="/lib/bootstrap/css/bootstrap.min.css" />
     <!-- Font Awesome -->
     <link rel="stylesheet" asp-href-include="/lib/font-awesome/css/all.min.css" />
     <!-- Custom CSS -->
@@ -17,14 +16,14 @@
 </head>
 <body>
     <!-- Navigation -->
-    <div class="navbar navbar-expand-md bg-dark navbar-dark justify-content-center">
+    <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand" asp-controller="Home" asp-action="Index">BUG-TRACKER</a>
 
             <!-- Toggler/collapsible Button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#MyNavbar">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#MyNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -41,7 +40,7 @@
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Admin</a>
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Admin</a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" asp-controller="Admin"
                                        asp-action="Index">User Management</a>
@@ -95,9 +94,9 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script asp-src-include="lib/jquery/jquery.slim.min.js"></script>
+    <script asp-src-include="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
 
