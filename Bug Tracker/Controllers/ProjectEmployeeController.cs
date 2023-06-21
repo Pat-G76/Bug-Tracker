@@ -2,6 +2,7 @@
 using Bug_Tracker.Models;
 using Bug_Tracker.Models.ViewModels;
 using ContosoUniversity.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters.Xml;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Bug_Tracker.Controllers
 {
+	[Authorize]
 	public class ProjectEmployeeController : Controller
 	{
 
