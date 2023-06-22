@@ -11,7 +11,7 @@ namespace Bug_Tracker.Models
         [Required(ErrorMessage = "Fill in the comment")]
         public string? Body { get; set; }
 
-        public string? TimeDetails { get; set; }
+        public DateTime TimeCreated { get; set; }
 
         public string EmployeeId { get; set; }
 		public int TicketID { get; set; }

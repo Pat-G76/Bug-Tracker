@@ -20,6 +20,11 @@ b {
     padding-right: 1em;
 }
 
+
+div.ticketParams {
+    margin-top: 4rem;
+}
+
 table#UserList td {
     vertical-align: middle;
 }

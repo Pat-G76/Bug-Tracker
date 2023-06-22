@@ -32,11 +32,13 @@
 	public class TicketDetails
 	{
 
+		public Ticket Ticket { get; set; }
 		public Status Status { get; set; }
 		public Priority Priority { get; set; }
 		public IssueType IssueType { get; set; }
 		public Project Project { get; set; }
-		public Employee Employee { get; set; }
+		public Employee Assignee { get; set; }
+		public Employee TicketCreator { get; set; }
 		public IEnumerable<Comment> Comments { get; set; }
 
 

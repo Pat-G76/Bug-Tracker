@@ -23,32 +23,56 @@ namespace Bug_Tracker.Controllers
         }
 
 
-        public IActionResult TicketDetails(int id)
+        public async Task<IActionResult> TicketDetails(int id)
         {
 
-            Ticket ticket = wrapper.Ticket.GetById(id);
-            
+            Ticket ticket = wrapper.Ticket.GetById(id);            
 
             if(ticket == null)
             {
                 return NotFound();
             }
-                     
-			var ticketDetails = new TicketDetails();
 
-			ticketDetails.Status  = wrapper.Status.GetById(ticket.StatusID);
-			ticketDetails.Priority  = wrapper.Priority.GetById(ticket.PriorityID);
-			ticketDetails.IssueType  = wrapper.IssueType.GetById(ticket.IssueTypeID);
-			ticketDetails.Project  = wrapper.Project.GetById(ticket.ProjectID);
-			ticketDetails.Employee = userManager.Users.First(e => e.FirstName == ticket.AssigneeFirstName && e.LastName == ticket.AssigneeLastName);
-
-			ticketDetails.Comments = wrapper.Comment.FindByCondition(c => c.TicketID == id);
+			TicketDetails ticketDetails = await TicketInfo(id);
 
 			return View(ticketDetails);
         }
 
+        [ActionName("TicketDetails")]
+        [HttpPost]
+		public async Task<IActionResult> AddComment(int id, string comment)
+        {
 
-        public async Task<IActionResult> CreateTicket(int id)
+            Employee employee = await userManager.FindByNameAsync(User.Identity.Name);
+
+            Ticket ticket = wrapper.Ticket.GetById(id);
+
+            if (!string.IsNullOrEmpty(comment))
+            {
+
+                Comment newComment = new Comment();
+
+                newComment.TimeCreated = DateTime.Now;
+                newComment.TicketID = id;
+                newComment.Body = comment;
+                newComment.EmployeeId = employee.Id;
+
+                wrapper.Comment.Add(newComment);
+
+                wrapper.saveChanges();
+
+            }
+
+
+			TicketDetails ticketDetails = await TicketInfo(id);
+
+			return View(ticketDetails);
+
+
+		}
+
+
+		public async Task<IActionResult> CreateTicket(int id)
         {
 
 			Employee employee = await userManager.FindByNameAsync(User.Identity.Name);
@@ -181,7 +205,36 @@ namespace Bug_Tracker.Controllers
 
         }
 
-        private bool IsInProject(Employee employee, int projectID)
+        private async Task<TicketDetails> TicketInfo(int id)
+        {
+
+			Ticket ticket = wrapper.Ticket.GetById(id);
+
+			if (ticket == null)
+			{
+                return null;
+			}
+
+			Employee Creator = await userManager.FindByIdAsync(ticket.EmployeeId);
+
+
+			TicketDetails ticketDetails = new TicketDetails();
+
+			ticketDetails.Ticket = ticket;
+			ticketDetails.Status = wrapper.Status.GetById(ticket.StatusID);
+			ticketDetails.Priority = wrapper.Priority.GetById(ticket.PriorityID);
+			ticketDetails.IssueType = wrapper.IssueType.GetById(ticket.IssueTypeID);
+			ticketDetails.Project = wrapper.Project.GetById(ticket.ProjectID);
+			ticketDetails.Assignee = userManager.Users.First(e => e.FirstName == ticket.AssigneeFirstName && e.LastName == ticket.AssigneeLastName);
+			ticketDetails.TicketCreator = Creator;
+
+			ticketDetails.Comments = wrapper.Comment.FindByCondition(c => c.TicketID == id);
+
+            return ticketDetails;
+
+		}
+
+		private bool IsInProject(Employee employee, int projectID)
 		{
 
 			IEnumerable<ProjectEmployee> projectEmployees = wrapper.ProjectEmployee.GetAllItems().Where(pe => pe.ProjectID == projectID);

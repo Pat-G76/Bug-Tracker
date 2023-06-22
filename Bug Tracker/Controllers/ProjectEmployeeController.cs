@@ -71,7 +71,7 @@ namespace Bug_Tracker.Controllers
 					{
 						ModelState.AddModelError("", "Employee not found. Please use the hint to search for an employee.");
 					}
-					else if(wrapper.ProjectEmployee.FindByCondition(pe => pe.EmployeeId == employee.Id) != null)
+					else if(wrapper.ProjectEmployee.GetProjectEmployee(id, employee.Id) != null)
 					{
 						ModelState.AddModelError("", "The employee has already been added.");
 					}
@@ -87,8 +87,6 @@ namespace Bug_Tracker.Controllers
 						wrapper.saveChanges();
 
 						return RedirectToAction("Index");
-
-						//wrapper.ProjectEmployee.Add()
 					}
 
 				}
@@ -97,7 +95,6 @@ namespace Bug_Tracker.Controllers
 					ModelState.AddModelError("", "Enter the employee FirstName first and then lastName. Make sure you separate them by a single space");
 				}
 
-				//Employee employee = await userManager.Users.Where(e => e.)
 
 			}
 

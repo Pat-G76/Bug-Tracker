@@ -55,7 +55,7 @@
 
 				<td>@project.ProjectID</td>
 				<td>
-					<a asp-controller="ProjectTicket" asp-action="Index" asp-route-id="@project.ProjectID"> @project.ProjectName </a>
+					<a style="text-decoration: none;" asp-controller="ProjectTicket" asp-action="Index" asp-route-id="@project.ProjectID"> @project.ProjectName </a>
 				</td>
 				<td>@project.ProjectDescription</td>
 				<td>@project.TimeCreated</td>

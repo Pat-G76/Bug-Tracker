@@ -2,6 +2,7 @@
 using Bug_Tracker.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
@@ -96,15 +97,16 @@ namespace Bug_Tracker.Data
 		public Employee GetEmployeeWithProjects(string id)
         {
             return dbContext.Set<Employee>().Include(e => e.ProjectEmployees).ThenInclude(e => e.Project).First(e => e.Id == id);
-        }
+		}
 
-        //public IEnumerable<Employee> GetEmployeeWithTickets(string id)
-        //{
+		public async Task<Employee> GetEmployeeByComment(int commentID)
+		{
+
+			Comment comment = dbContext.Comments.FirstOrDefault(c => c.CommentID == commentID);
 
 
+			return await userManager.FindByIdAsync(comment.EmployeeId);
 
-
-        //    return dbContext.Set<Employee>().Include(e => e.EmployeeTickets).ThenInclude(e => e.Ticket).Where(e => e.Id == id);
-        //}
+		}
 	}
 }

@@ -1,0 +1,303 @@
+﻿@model TicketDetails
+
+@{
+	ViewData["Title"] = "TicketDetails";
+}
+
+
+
+<h3 class="text-center">@Model.Ticket.TicketName</h3>
+
+<br />
+<hr />
+<br />
+
+
+
+<div class="row ticketParams">
+
+	<div class="col col-sm-3">
+
+		<h4>Ticket Description</h4>
+
+	</div>
+
+
+	<div class="col border border-2">
+
+		<p>@Model.Ticket.TicketDescription</p>
+
+	</div>
+
+</div>
+
+
+<div class="row ticketParams">
+
+	<div class="col col-sm-3">
+
+		<h4>Priority</h4>
+
+	</div>
+
+
+	<div class="col border border-2">
+
+		<p>@Model.Priority.PriorityLevel</p>
+
+	</div>
+
+</div>
+
+
+
+
+<div class="row ticketParams">
+
+	<div class="col col-sm-3">
+
+		<h4>Status</h4>
+
+	</div>
+
+
+	<div class="col border border-2">
+
+		<p>@Model.Status.StatusTitle</p>
+
+	</div>
+
+</div>
+
+
+<div class="row ticketParams">
+
+	<div class="col col-sm-3">
+
+		<h4> Issue Type </h4>
+
+	</div>
+
+
+	<div class="col border border-2">
+
+		<p> @Model.IssueType.TypeTitle </p>
+
+	</div>
+
+</div>
+
+
+<div class="row ticketParams">
+
+	<div class="col col-sm-3">
+
+		<h4> Assignee </h4>
+
+	</div>
+
+
+	<div class="col border border-2">
+
+
+		<div class="row">
+
+			<div class="col">
+
+				<h4> Names </h4>
+
+				<p>@Model.Assignee.FirstName @Model.Assignee.LastName</p>
+
+			</div>
+
+
+			<div class="col">
+
+				<h4> Phone </h4>
+
+				<p>@Model.Assignee.PhoneNumber</p>
+
+			</div>
+
+			<div class="col">
+
+				<h4> Email </h4>
+
+				<p>@Model.Assignee.Email</p>
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+</div>
+
+
+<div class="row ticketParams">
+
+	<div class="col col-sm-3">
+
+		<h4> Author </h4>
+
+	</div>
+
+
+	<div class="col border border-2">
+
+
+		<div class="row">
+
+			<div class="col">
+
+				<h4> Names </h4>
+
+				<p>@Model.TicketCreator.FirstName @Model.TicketCreator.LastName</p>
+
+			</div>
+
+
+			<div class="col">
+
+				<h4> Phone </h4>
+
+				<p>@Model.TicketCreator.PhoneNumber</p>
+
+			</div>
+
+			<div class="col">
+
+				<h4> Email </h4>
+
+				<p>@Model.TicketCreator.Email</p>
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+<br />
+<hr />
+<br />
+
+
+<div class="row ticketParams">
+
+	<div class="col col-sm-3">
+
+		<h4>Created</h4>
+
+	</div>
+
+
+	<div class="col border border-2">
+
+		<p>@Model.Ticket.Created</p>
+
+	</div>
+
+</div>
+
+
+<div class="row ticketParams">
+
+	<div class="col col-sm-3">
+
+		<h4>Due</h4>
+
+	</div>
+
+
+	<div class="col border border-2">
+
+		@if(Model.Ticket.DueDate < DateTime.Now)
+		{
+			<p class="text-danger">@Model.Ticket.DueDate</p>
+		}
+		else
+		{
+			<p>@Model.Ticket.DueDate</p>
+		}
+
+	</div>
+
+</div>
+
+<div class="row ticketParams">
+
+	<div class="col col-sm-3">
+
+		<h4>Opened on </h4>
+
+	</div>
+
+
+	<div class="col border border-2">
+
+		@if (default(DateTime) == @Model.Ticket.OpenedDate)
+		{
+			<p>Not yet opened</p>
+		}
+		else
+		{
+			<p>@Model.Ticket.OpenedDate</p>
+		}
+
+	</div>
+
+</div>
+
+
+<br />
+<br />
+
+<form method="post" asp-action="TicketDetails" asp-route-id="@Model.Ticket.TicketID">
+
+	<textarea class="form-control" name="comment" style="resize:none;" placeholder="Write your comment here" rows="6" ></textarea>
+
+	<button class="btn btn-primary mt-2" type="submit">Submit</button>
+
+</form>
+
+<br />
+<br />
+
+<h2>Comments</h2>
+
+<div class="overflow-auto mt-5" style="height: 500px;">
+
+
+	@foreach(var comment in Model.Comments)
+	{
+	
+
+
+		<div>
+
+			<h4>
+				@comment.Employee.FirstName @comment.Employee.LastName
+
+				<sup style="font-size: 10px; color: grey;">@Model.GetCommentPostedDate(comment.TimeCreated)</sup>
+
+			</h4>
+
+
+
+			<h5 class="mb-5 fw-normal">@comment.Body</h5>
+
+		</div>
+
+
+
+	}
+
+
+</div>

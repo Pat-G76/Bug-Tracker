@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Security;
 
 namespace Bug_Tracker.Controllers
 {
@@ -74,7 +75,7 @@ namespace Bug_Tracker.Controllers
 			}
 			else
 			{
-				searchString = searchString.ToLower();
+				searchString = searchString.ToLower().Trim();
 
 				totalPages = wrapper.Employee.GetAllItems().Where(e => e.FirstName.ToLower().Contains(searchString) || e.LastName.ToLower().Contains(searchString) || e.UserName.ToLower().Contains(searchString)).Count();
 
