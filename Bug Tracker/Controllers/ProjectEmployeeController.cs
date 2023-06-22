@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Bug_Tracker.Controllers
 {
-	[Authorize]
+	[Authorize(Roles = "administrator")]
 	public class ProjectEmployeeController : Controller
 	{
 

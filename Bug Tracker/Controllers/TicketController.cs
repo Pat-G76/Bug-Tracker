@@ -1,5 +1,6 @@
 ﻿using Bug_Tracker.Data;
 using Bug_Tracker.Models;
+using Bug_Tracker.Models.ViewModels;
 using ContosoUniversity.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -26,17 +27,24 @@ namespace Bug_Tracker.Controllers
         {
 
             Ticket ticket = wrapper.Ticket.GetById(id);
-
+            
 
             if(ticket == null)
             {
                 return NotFound();
             }
+                     
+			var ticketDetails = new TicketDetails();
 
+			ticketDetails.Status  = wrapper.Status.GetById(ticket.StatusID);
+			ticketDetails.Priority  = wrapper.Priority.GetById(ticket.PriorityID);
+			ticketDetails.IssueType  = wrapper.IssueType.GetById(ticket.IssueTypeID);
+			ticketDetails.Project  = wrapper.Project.GetById(ticket.ProjectID);
+			ticketDetails.Employee = userManager.Users.First(e => e.FirstName == ticket.AssigneeFirstName && e.LastName == ticket.AssigneeLastName);
 
+			ticketDetails.Comments = wrapper.Comment.FindByCondition(c => c.TicketID == id);
 
-
-            return View();
+			return View(ticketDetails);
         }
 
 

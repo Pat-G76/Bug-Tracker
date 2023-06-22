@@ -82,7 +82,7 @@ namespace Bug_Tracker.Controllers
 
             }
 
-			TicketInformation ticketList = new TicketInformation()
+			TicketsInformation ticketList = new TicketsInformation()
             {
                 ticketsByStatus = ticketsByStatus,
                 issueTypes = wrapper.IssueType.GetAllItems(),

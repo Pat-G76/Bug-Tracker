@@ -1,4 +1,4 @@
-﻿@model TicketInformation
+﻿@model TicketsInformation
 
 @{
 	ViewBag.Title = "Tickets";
@@ -62,7 +62,7 @@
 
 						<td>
 
-							<a style="text-decoration: none;" asp-controller="Ticket" asp-action="Index" asp-route-id="@ticket.TicketID">
+							<a style="text-decoration: none;" asp-controller="Ticket" asp-action="TicketDetails" asp-route-id="@ticket.TicketID">
 
 								@ticket.TicketName
 
