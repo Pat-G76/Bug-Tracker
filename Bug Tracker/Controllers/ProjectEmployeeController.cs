@@ -31,6 +31,11 @@ namespace Bug_Tracker.Controllers
 
 			Project project = wrapper.Project.GetById(id);
 
+			if(project == null)
+			{
+				return NotFound();
+			}
+
 			IEnumerable<Employee> employees = wrapper.ProjectEmployee.EmployeesForProject(id).Select(pe => pe.Employee);
 
 			List<string> names = new List<string>();
@@ -65,6 +70,10 @@ namespace Bug_Tracker.Controllers
 					if(employee == null)
 					{
 						ModelState.AddModelError("", "Employee not found. Please use the hint to search for an employee.");
+					}
+					else if(wrapper.ProjectEmployee.FindByCondition(pe => pe.EmployeeId == employee.Id) != null)
+					{
+						ModelState.AddModelError("", "The employee has already been added.");
 					}
 					else
 					{
@@ -111,5 +120,23 @@ namespace Bug_Tracker.Controllers
 
 		}
 
+		public async Task<IActionResult> RemoveFromProject(int id, string EmployeeId)
+		{
+
+			ProjectEmployee projectEmployee = wrapper.ProjectEmployee.GetProjectEmployee(id, EmployeeId);
+
+			if (projectEmployee == null)
+			{
+				return NotFound();
+			}
+
+			wrapper.ProjectEmployee.Remove(projectEmployee);
+
+			wrapper.saveChanges();
+
+			return RedirectToAction("Index", new { id = id });
+
+		}
+		
 	}
 }

@@ -25,5 +25,12 @@ namespace Bug_Tracker.Data
 
 		}
 
+		public ProjectEmployee GetProjectEmployee(int ProjectID, string EmployeeID)
+		{
+
+			return dbContext.ProjectEmployees.FirstOrDefault(pe => pe.ProjectID == ProjectID && pe.EmployeeId == EmployeeID);
+
+		}
+
 	}
 }
