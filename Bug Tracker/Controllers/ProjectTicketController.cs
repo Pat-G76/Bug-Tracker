@@ -37,7 +37,7 @@ namespace Bug_Tracker.Controllers
 			List<Ticket> finalTickets = new List<Ticket>();
 
 
-			Stack<Ticket> ticketsStack = new Stack<Ticket>(wrapper.Ticket.GetAllItems());
+			Stack<Ticket> ticketsStack = new Stack<Ticket>(wrapper.Ticket.GetAllItems().Where(t => t.ProjectID == id));
 
             while(ticketsStack.Count > 0)
             {

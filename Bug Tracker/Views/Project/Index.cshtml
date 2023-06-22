@@ -63,6 +63,9 @@
 						<a class="btn btn-primary" asp-action="UpdateProject" asp-route-id="@project.ProjectID">
 							<i class="fas fa-edit"></i>
 						</a>
+						<a class="btn btn-primary" asp-controller="ProjectEmployee" asp-action="Index" asp-route-id="@project.ProjectID">
+							<i class="fa-solid fa-user-plus fa-sm"></i>
+						</a>
 					}
 
 				</td>

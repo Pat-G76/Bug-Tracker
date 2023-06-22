@@ -32,3 +32,9 @@ table#UserList h4 {
 form#CreateTicketForm input{
     margin-bottom: 2rem;
 }
+
+tr#Tickets td {
+    vertical-align: middle;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}

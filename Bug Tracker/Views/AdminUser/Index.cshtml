@@ -12,21 +12,30 @@
 
 		<div class="col">
 
-			<input value="@ViewBag.searchString" placeholder="Name of user" name="searchString" />
-			<button type="submit"> Search </button>
+			<div class="form-group">
+				<input class="mb-2" value="@ViewBag.searchString" placeholder="Name of user" name="searchString" />
+				<button type="submit"> Search </button>
+			</div>
+
+			
 
 		</div>
 
 		<div class="col">
 
-			<label for="cars">Start with employees in role : </label>
-			<select name="role" id="cars" >
-				@foreach(string role in Model.allRoles)
-				{										
-					<option value="@role">@role</option>					
-				}
+			<div class="form-group">
+						
+				<label class="mb-2" for="cars">Start with employees in role : </label>
+
+				<select name="sortBy" id="cars">
+					@foreach(string role in Model.allRoles)
+					{										
+						<option value="@role">@role</option>					
+					}
 				
-			</select>
+				</select>
+
+			</div>
 
 		</div>
 		

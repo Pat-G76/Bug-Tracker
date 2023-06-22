@@ -5,27 +5,43 @@
 }
 
 
+<div class="text-end">
+
+	<a class="btn btn-primary" asp-controller="Ticket" asp-action="CreateTicket" asp-route-id="@Model.project.ProjectID">		
+		<i class="fa-solid fa-plus fa-lg"></i>
+	</a>	
+	
+</div>
+
+
+
 @foreach (var ticketInfo in Model.ticketsByStatus)
 {
 
-
 	<div class="mt-5">
 
-		
-		<table class="table">
+
+		<span style="font-size: 20px;">
+
+			<button type="button" class="btn btn-info rounded-circle mb-2" data-bs-toggle="collapse" data-bs-target="@("#collapse" + ticketInfo.Key)" aria-expanded="true" aria-controls="@("collapse" + ticketInfo.Key)">
+
+				<i class="fa-solid fa-arrow-down fa-lg"></i>
+
+			</button>
+
+			@ticketInfo.Key
+
+		</span>
+
+
+
+		<table class="table table-hover collapse @(ticketInfo.Value.Count > 0 ? "show" : "")" id="@("collapse" + ticketInfo.Key)">
 
 			<thead>
 
 				<tr>
 
-					<th width="2%">
-
-						<button type="button" class="btn btn-info" data-bs-toggle="collapse" data-bs-target="@("#collapse" + ticketInfo.Key)">
-							<i class="fa-solid fa-circle-"></i>
-						</button>
-
-					</th>
-					<th>@ticketInfo.Key</th>
+					<th>Ticket Name</th>
 					<th>Created</th>
 					<th>Due</th>				
 					<th>Assignee</th>
@@ -37,19 +53,22 @@
 
 			</thead>
 
-			<tbody class="collapse" id="@("collapse" + ticketInfo.Key)">
+			<tbody>
 
 				@foreach(var ticket in ticketInfo.Value)
 				{
-				
-					<tr>
+
+					<tr id="Tickets">
 
 						<td>
-							
+
+							<a style="text-decoration: none;" asp-controller="Ticket" asp-action="Index" asp-route-id="@ticket.TicketID">
+
+								@ticket.TicketName
+
+							</a>
 
 						</td>
-
-						<td> @ticket.TicketName </td>
 
 						<td> @ticket.Created </td>
 
@@ -62,6 +81,12 @@
 						<td style="color:@Model.GetColor(ticket.PriorityID); font-weight:bold;"> @Model.priorities.First(p => p.PriorityID == ticket.PriorityID).PriorityLevel </td>
 
 						<td> @Model.issueTypes.First(i => i.IssueTypeID == ticket.IssueTypeID).TypeTitle </td>
+
+						<td>
+							
+							
+							
+						</td>
 
 					</tr>
 
