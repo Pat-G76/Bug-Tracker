@@ -7,6 +7,5 @@ namespace Bug_Tracker.Data
     {
         IEnumerable<Ticket> GetTicketsForProject(int projectId);
         IEnumerable<Ticket> GetTicketsForEmployee(string id);
-
 	}
 }

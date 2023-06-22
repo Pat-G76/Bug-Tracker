@@ -21,5 +21,7 @@ namespace Bug_Tracker.Data
             return dbContext.Tickets.Where(t => t.EmployeeId == id);
 		}
 
+		
+
 	}
 }

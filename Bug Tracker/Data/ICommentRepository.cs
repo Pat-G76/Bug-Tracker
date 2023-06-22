@@ -5,7 +5,8 @@ namespace Bug_Tracker.Data
 {
     public interface ICommentRepository : IRepositoryBase<Comment>
     {
-        IEnumerable<Comment> GetProjectComments(int projectId);
-    }
+		IEnumerable<Comment> GetTicketComments(int ticketID);
+		
+	}
 
 }

@@ -22,8 +22,20 @@ namespace Bug_Tracker.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult TicketDetails(int id)
         {
+
+            Ticket ticket = wrapper.Ticket.GetById(id);
+
+
+            if(ticket == null)
+            {
+                return NotFound();
+            }
+
+
+
+
             return View();
         }
 

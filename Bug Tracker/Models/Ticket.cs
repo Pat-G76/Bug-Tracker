@@ -46,6 +46,9 @@ namespace Bug_Tracker.Models
 		public IssueType? IssueType { get; set; }
 		public Employee? Employee { get; set; }
 
-        
-    }
+		[ForeignKey("TicketID")]
+		public List<Comment>? Comments { get; set; }
+
+
+	}
 }

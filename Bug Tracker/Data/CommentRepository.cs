@@ -12,10 +12,10 @@ namespace Bug_Tracker.Data
 
         }
 
-        public IEnumerable<Comment> GetProjectComments(int projectId)
-        {
-            return dbContext.Comments.Where(c => c.ProjectID == projectId);
-        }
+		public IEnumerable<Comment> GetTicketComments(int ticketID)
+		{
+			return dbContext.Comments.Where(c => c.TicketID == ticketID);
+		}
 
-    }
+	}
 }

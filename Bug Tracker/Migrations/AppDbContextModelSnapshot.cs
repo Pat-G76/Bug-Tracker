@@ -38,7 +38,7 @@ namespace Bug_Tracker.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("ProjectID")
+                    b.Property<int>("TicketID")
                         .HasColumnType("int");
 
                     b.Property<string>("TimeDetails")
@@ -48,7 +48,7 @@ namespace Bug_Tracker.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("ProjectID");
+                    b.HasIndex("TicketID");
 
                     b.ToTable("Comment", (string)null);
                 });
@@ -224,7 +224,6 @@ namespace Bug_Tracker.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmployeeId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("IssueTypeID")
@@ -433,24 +432,22 @@ namespace Bug_Tracker.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Bug_Tracker.Models.Project", "Project")
+                    b.HasOne("Bug_Tracker.Models.Ticket", "Ticket")
                         .WithMany("Comments")
-                        .HasForeignKey("ProjectID")
+                        .HasForeignKey("TicketID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employee");
 
-                    b.Navigation("Project");
+                    b.Navigation("Ticket");
                 });
 
             modelBuilder.Entity("Bug_Tracker.Models.Ticket", b =>
                 {
                     b.HasOne("Bug_Tracker.Models.Employee", "Employee")
                         .WithMany("Tickets")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("Bug_Tracker.Models.Priority", "Priority")
                         .WithMany("Tickets")
@@ -576,8 +573,6 @@ namespace Bug_Tracker.Migrations
 
             modelBuilder.Entity("Bug_Tracker.Models.Project", b =>
                 {
-                    b.Navigation("Comments");
-
                     b.Navigation("ProjectEmployees");
 
                     b.Navigation("Tickets");
@@ -586,6 +581,11 @@ namespace Bug_Tracker.Migrations
             modelBuilder.Entity("Bug_Tracker.Models.Status", b =>
                 {
                     b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("Bug_Tracker.Models.Ticket", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

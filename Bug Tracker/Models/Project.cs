@@ -21,9 +21,6 @@ namespace Bug_Tracker.Models
 
 
         [ForeignKey("ProjectID")]
-        public List<Comment>? Comments { get; set; }
-
-        [ForeignKey("ProjectID")]
         public List<Ticket>? Tickets { get; set; }
 
         [ForeignKey("ProjectID")]

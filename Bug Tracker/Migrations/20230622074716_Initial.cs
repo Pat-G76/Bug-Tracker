@@ -214,34 +214,6 @@ namespace Bug_Tracker.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comment",
-                columns: table => new
-                {
-                    CommentID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Body = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TimeDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProjectID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comment", x => x.CommentID);
-                    table.ForeignKey(
-                        name: "FK_Comment_AspNetUsers_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Comment_Project_ProjectID",
-                        column: x => x.ProjectID,
-                        principalTable: "Project",
-                        principalColumn: "ProjectID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProjectEmployee",
                 columns: table => new
                 {
@@ -284,7 +256,7 @@ namespace Bug_Tracker.Migrations
                     StatusID = table.Column<int>(type: "int", nullable: false),
                     PriorityID = table.Column<int>(type: "int", nullable: false),
                     IssueTypeID = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     TypeID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -294,8 +266,7 @@ namespace Bug_Tracker.Migrations
                         name: "FK_Ticket_AspNetUsers_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Ticket_IssueType_TypeID",
                         column: x => x.TypeID,
@@ -318,6 +289,34 @@ namespace Bug_Tracker.Migrations
                         column: x => x.StatusID,
                         principalTable: "Status",
                         principalColumn: "StatusID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comment",
+                columns: table => new
+                {
+                    CommentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Body = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TimeDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TicketID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comment", x => x.CommentID);
+                    table.ForeignKey(
+                        name: "FK_Comment_AspNetUsers_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comment_Ticket_TicketID",
+                        column: x => x.TicketID,
+                        principalTable: "Ticket",
+                        principalColumn: "TicketID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -366,9 +365,9 @@ namespace Bug_Tracker.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_ProjectID",
+                name: "IX_Comment_TicketID",
                 table: "Comment",
-                column: "ProjectID");
+                column: "TicketID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProjectEmployee_EmployeeId",
@@ -431,10 +430,10 @@ namespace Bug_Tracker.Migrations
                 name: "ProjectEmployee");
 
             migrationBuilder.DropTable(
-                name: "Ticket");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Ticket");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
