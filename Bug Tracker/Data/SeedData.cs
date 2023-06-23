@@ -63,12 +63,14 @@ namespace Bug_Tracker.Data
 
 		private static readonly List<Employee> SeedUsers = new()
 		{
-		   new Employee {UserName = "Admin", FirstName = "Patrick", LastName = "Smith", Email = "admin@gmail.com", PhoneNumber = "066 883 5545", DateCaptured = DateTime.Now},
+		   new Employee {UserName = "explorer", FirstName = "Guest", LastName = "Visitor", Email = "visitor@gmail.com", PhoneNumber = "066 234 5665", DateCaptured = DateTime.Now},
+		   new Employee {UserName = "Admin", FirstName = "Patrick", LastName = "Smith", Email = "admin@gmail.com", PhoneNumber = "066 883 5545", DateCaptured = DateTime.Now},		   
 		   new Employee {UserName = "putswane", FirstName = "Jonas", LastName = "Maredi", Email = "jonny@gmail.com", PhoneNumber = "066 563 3465", DateCaptured = DateTime.Now},
 		   new Employee {UserName = "comedy404", FirstName = "Piet", LastName = "Mashao", Email = "piet@gmail.com", PhoneNumber = "066 563 1225", DateCaptured = DateTime.Now},
 		   new Employee {UserName = "psycho69", FirstName = "Patrick", LastName = "Bateman", Email = "paul@gmail.com", PhoneNumber = "066 563 5165", DateCaptured = DateTime.Now},
 		   new Employee {UserName = "healer", FirstName = "Freddy", LastName = "Johnson", Email = "freddy@gmail.com", PhoneNumber = "063 563 6565", DateCaptured = DateTime.Now},
 		   new Employee {UserName = "joy66", FirstName = "Betty", LastName = "Maredi", Email = "betty@gmail.com", PhoneNumber = "066 654 5665", DateCaptured = DateTime.Now}
+		   
 		};
 
 		public static async void CreateAdminUser(IApplicationBuilder app)
@@ -77,6 +79,7 @@ namespace Bug_Tracker.Data
 
 			string adminRole = "administrator";
 			string employeesRole = "developer";
+			int index = 0;
 
 
 			UserManager<Employee> userManager = app.ApplicationServices
@@ -95,7 +98,7 @@ namespace Bug_Tracker.Data
 				await roleManager.CreateAsync(new IdentityRole(employeesRole));
 
 
-            if (userManager.Users.Count() == 0)
+            if (userManager.Users.Count() > 0)
             {
 
 				foreach (Employee employee in SeedUsers)
@@ -108,7 +111,9 @@ namespace Bug_Tracker.Data
 						await userManager.AddToRoleAsync(employee, adminRole);
 					}
 
-					adminRole = employeesRole;
+					adminRole = index > 2 ? employeesRole : adminRole;
+
+					index++;
 
 				}
             }
