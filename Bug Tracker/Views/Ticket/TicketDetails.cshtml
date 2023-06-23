@@ -1,9 +1,10 @@
 ﻿@model TicketDetails
 
+
 @{
 	ViewData["Title"] = "TicketDetails";
+	
 }
-
 
 
 <h3 class="text-center">@Model.Ticket.TicketName</h3>
@@ -12,6 +13,68 @@
 <hr />
 <br />
 
+<div class="text-end">
+
+	@if(User.Identity.Name == Model.Assignee.UserName)
+	{
+
+		<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#ModalSatusForm">
+			Update
+		</button>
+
+		<!-- Modal HTML Markup -->
+		<div id="ModalSatusForm" class="modal fade">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title">Status</h1>
+					</div>
+					<div class="modal-body">
+						<form method="post" asp-action="UpdateTicketStatus">							
+
+							<input asp-for="Ticket.TicketID" name="ticketID" type="hidden" />
+
+							<div class="text-start">
+								<label>Status</label>
+
+							</div>
+								
+							<select name="statusID" class="form-select">
+								@foreach(var status in Model.Statuses)
+								{ 
+									<option value="@status.StatusID">@status.StatusTitle</option>
+								}
+
+							</select>
+
+
+							<div class="row">
+								<div class="text-start col">
+									<button type="submit" class="btn btn-success mt-3">Update</button>
+								</div>
+								<div class="text-end col">
+									<button class="btn btn-secondary mt-3" data-bs-dismiss="modal" type="button">Cancel</button>
+								</div>
+							</div>
+							
+							
+						</form>						
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+
+		<!-- /.modal -->
+
+	}
+	else if (User.Identity.Name == Model.TicketCreator.UserName)
+	{
+
+		<a class="btn btn-primary" asp-action="UpdateTicket" asp-route-id="@Model.Ticket.TicketID">Update</a>
+
+	}
+
+</div>
 
 
 <div class="row ticketParams">
@@ -259,11 +322,17 @@
 <br />
 <br />
 
-<form method="post" asp-action="TicketDetails" asp-route-id="@Model.Ticket.TicketID">
+@*@(ViewBag.IsSubmitted ? "autofocus" : "")*@
 
-	<textarea class="form-control" name="comment" style="resize:none;" placeholder="Write your comment here" rows="6" ></textarea>
+<form method="post" asp-action="TicketDetails" asp-route-id="@Model.Ticket.TicketID" id="myComments">
 
-	<button class="btn btn-primary mt-2" type="submit">Submit</button>
+@*	<input type="hidden" id="ScrollPositionX" name="ScrollPositionX" value="@scrollPositionX" />
+*@
+	<textarea class="form-control" name="comment" style="resize:none;" placeholder="Write your comment here" rows="6"></textarea>
+
+	<button class="btn btn-primary mt-2" type="submit" @(ViewBag.IsSubmitted ? "autofocus" : "")>
+		Submit
+	</button>
 
 </form>
 

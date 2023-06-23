@@ -98,7 +98,7 @@ namespace Bug_Tracker.Data
 				await roleManager.CreateAsync(new IdentityRole(employeesRole));
 
 
-            if (userManager.Users.Count() > 0)
+            if (userManager.Users.Count() < 1)
             {
 
 				foreach (Employee employee in SeedUsers)

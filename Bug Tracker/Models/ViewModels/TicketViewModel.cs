@@ -40,6 +40,7 @@
 		public Employee Assignee { get; set; }
 		public Employee TicketCreator { get; set; }
 		public IEnumerable<Comment> Comments { get; set; }
+		public IEnumerable<Status> Statuses { get; set; }
 
 
 		public string GetCommentPostedDate(DateTime date)

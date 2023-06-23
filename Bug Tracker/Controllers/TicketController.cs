@@ -5,6 +5,7 @@ using ContosoUniversity.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net.Sockets;
 
 namespace Bug_Tracker.Controllers
@@ -32,6 +33,8 @@ namespace Bug_Tracker.Controllers
             {
                 return NotFound();
             }
+
+			ViewBag.IsSubmitted = false;
 
 			TicketDetails ticketDetails = await TicketInfo(id);
 
@@ -64,9 +67,14 @@ namespace Bug_Tracker.Controllers
             }
 
 
+            
+
+			ViewBag.IsSubmitted = true;
+
 			TicketDetails ticketDetails = await TicketInfo(id);
 
-			return View(ticketDetails);
+            return View(ticketDetails);
+                
 
 
 		}
@@ -97,8 +105,10 @@ namespace Bug_Tracker.Controllers
 			ViewBag.Priorities = wrapper.Priority.GetAllItems();
             ViewBag.IssueTypes = wrapper.IssueType.GetAllItems();
 
+			
 
-            return View(ticket);
+
+			return View(ticket);
         }
 
 		public async Task<IActionResult> UpdateTicket(int id)
@@ -205,7 +215,32 @@ namespace Bug_Tracker.Controllers
 
         }
 
-        private async Task<TicketDetails> TicketInfo(int id)
+		public IActionResult UpdateTicketStatus(int statusID, int ticketID)
+        {
+
+            Ticket ticket = wrapper.Ticket.GetById(ticketID);
+
+            Status status = wrapper.Status.GetById(statusID);
+
+            if(ticket != null && status != null)
+            {
+
+				ticket.OpenedDate = ticket.OpenedDate == default(DateTime) && status.StatusTitle.ToLower() != "new" ? DateTime.Now : ticket.OpenedDate;				
+
+
+				ticket.StatusID = statusID;
+
+                wrapper.Ticket.Update(ticket);
+
+                wrapper.saveChanges();
+
+            }
+
+            return RedirectToAction("TicketDetails", new { id = ticketID });
+
+        }
+
+		private async Task<TicketDetails> TicketInfo(int id)
         {
 
 			Ticket ticket = wrapper.Ticket.GetById(id);
@@ -227,6 +262,7 @@ namespace Bug_Tracker.Controllers
 			ticketDetails.Project = wrapper.Project.GetById(ticket.ProjectID);
 			ticketDetails.Assignee = userManager.Users.First(e => e.FirstName == ticket.AssigneeFirstName && e.LastName == ticket.AssigneeLastName);
 			ticketDetails.TicketCreator = Creator;
+            ticketDetails.Statuses = wrapper.Status.GetAllItems();
 
 			ticketDetails.Comments = wrapper.Comment.FindByCondition(c => c.TicketID == id);
 
