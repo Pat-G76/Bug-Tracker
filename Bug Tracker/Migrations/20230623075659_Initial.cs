@@ -299,7 +299,7 @@ namespace Bug_Tracker.Migrations
                     CommentID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Body = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TimeDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EmployeeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TicketID = table.Column<int>(type: "int", nullable: false)
                 },

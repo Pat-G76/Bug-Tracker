@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bug_Tracker.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230622190421_DeletedCommentCreatedDataType")]
-    partial class DeletedCommentCreatedDataType
+    [Migration("20230623075659_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
