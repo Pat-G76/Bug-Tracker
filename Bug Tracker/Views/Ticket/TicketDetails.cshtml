@@ -322,19 +322,39 @@
 <br />
 <br />
 
+<script type="text/javascript">
+	
+
+$(document).ready(function() {
+  $('form').on('submit', function(e) {
+	e.preventDefault(); // Prevent the default form submission behaviour
+	// Your form submission logic here
+
+	<form method="post" asp-action="TicketDetails" asp-route-id="@Model.Ticket.TicketID" id="myComments">
+
+		@*<input type="hidden" id="ScrollPositionX" name="ScrollPositionX" value="@scrollPositionX" />*@
+				
+		<textarea class="form-control" name="comment" style="resize:none;" placeholder="Write your comment here" rows="6" > </textarea>
+
+		<button class="btn btn-primary mt-2" type="submit" @(ViewBag.IsSubmitted ? "autofocus" : "")>
+			Submit
+		</button>
+
+	</form>
+
+
+	// After submitting, scroll back to the textarea
+	var commentInput = document.getElementById('comment');
+	commentInput.scrollIntoView();
+  });
+});
+
+</script>
+
+
 @*@(ViewBag.IsSubmitted ? "autofocus" : "")*@
 
-<form method="post" asp-action="TicketDetails" asp-route-id="@Model.Ticket.TicketID" id="myComments">
 
-@*	<input type="hidden" id="ScrollPositionX" name="ScrollPositionX" value="@scrollPositionX" />
-*@
-	<textarea class="form-control" name="comment" style="resize:none;" placeholder="Write your comment here" rows="6"></textarea>
-
-	<button class="btn btn-primary mt-2" type="submit" @(ViewBag.IsSubmitted ? "autofocus" : "")>
-		Submit
-	</button>
-
-</form>
 
 <br />
 <br />
@@ -370,3 +390,12 @@
 
 
 </div>
+
+
+
+
+
+
+
+
+
