@@ -31,7 +31,7 @@ namespace Bug_Tracker.Controllers
 		private readonly int pageSize = 6;
 
 		[TempData]
-		private string ResponseMessage { get; set; }
+		public string Message { get; set; }
 
         public AdminUserController( UserManager<Employee> _userManager,
 									RoleManager<IdentityRole> _roleManager,
@@ -51,6 +51,8 @@ namespace Bug_Tracker.Controllers
 
         public async Task<IActionResult> Index(int page = 1, string sortBy = "Unknown", string searchString = "")
 		{
+
+			ViewData["Message"] = Message;
 
 			IEnumerable<Employee> users;
 
@@ -95,7 +97,7 @@ namespace Bug_Tracker.Controllers
 			{
 				var roles = await userManager.GetRolesAsync(employee);
 
-				userRoles.Add(employee.UserName, string.Join(",", roles));
+				userRoles.Add(employee.UserName, string.Join(", ", roles));
 			}
 
 			List<string> allRoles = roleManager.Roles.Select(r => r.Name).ToList();
@@ -224,6 +226,9 @@ namespace Bug_Tracker.Controllers
 
 							if(finalResult.Succeeded)
 							{
+
+								Message = "User details succesfully updated.";
+
 								return RedirectToAction("Index");
 							}
 							else
@@ -241,6 +246,8 @@ namespace Bug_Tracker.Controllers
 					{
 
 						await userManager.UpdateAsync(user);
+
+						Message = "User details succesfully updated.";
 
 						return RedirectToAction("Index");
 					}
@@ -278,11 +285,11 @@ namespace Bug_Tracker.Controllers
 
 				if(result.Succeeded)
 				{
-					ResponseMessage = $"Successfully deleted {employee.FirstName} {employee.LastName}. Username - {employee.UserName}";
+					Message = $"Successfully deleted {employee.FirstName} {employee.LastName}. Username - {employee.UserName}";
 				}
 				else
 				{
-					ResponseMessage = $"Something went wrong and {employee.FirstName} {employee.LastName} failed to be removed.";
+					Message = $"Something went wrong and {employee.FirstName} {employee.LastName} failed to be removed.";
 				}
 
 				return RedirectToAction("Index");

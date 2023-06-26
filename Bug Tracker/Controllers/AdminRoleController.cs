@@ -13,8 +13,10 @@ namespace Bug_Tracker.Controllers
 		private readonly RoleManager<IdentityRole> roleManager;
 		private readonly UserManager<Employee> userManager;
 
+        [TempData] /*Assigned value will only be available until next request */
+        public string Message { get; set; }
 
-		public AdminRoleController(RoleManager<IdentityRole> _roleManager,
+        public AdminRoleController(RoleManager<IdentityRole> _roleManager,
 								   UserManager<Employee> _userManager)
 		{
 			roleManager = _roleManager;
@@ -24,6 +26,8 @@ namespace Bug_Tracker.Controllers
 
 		public async Task<IActionResult> Index()
 		{
+
+			ViewData["Message"] = Message;
 
 			var roles = roleManager.Roles;
 
@@ -82,7 +86,10 @@ namespace Bug_Tracker.Controllers
 
 					if(result.Succeeded)
 					{
-						return RedirectToAction("Index");
+
+                        Message = $"Role {Name} has been succesfully added.";
+
+                        return RedirectToAction("Index");
 					}
 
 					AddingErrorsToModelState(result);
@@ -97,7 +104,10 @@ namespace Bug_Tracker.Controllers
 
 					if(result.Succeeded)
 					{
-						return RedirectToAction("Index");
+
+                        Message = $"Role {Name} has been updated succesfully.";
+
+                        return RedirectToAction("Index");
 					}
 
 					AddingErrorsToModelState(result);
@@ -124,7 +134,9 @@ namespace Bug_Tracker.Controllers
 
 			await roleManager.DeleteAsync(role);
 
-			return RedirectToAction("Index");
+            Message = $"Role {role.Name} has been succesfully deleted.";
+
+            return RedirectToAction("Index");
 
 		}
 

@@ -5,7 +5,8 @@
 }
 
 
-<h2 class="text-center" style="margin-top: 100px; margin-bottom: 100px;">Add Employees to ( @Model.project.ProjectName ) Project</h2>
+<h2 class="text-center" style="margin-top: 100px; margin-bottom: 100px;">Add Employees to
+	( <a style="text-decoration: none" asp-controller="ProjectTicket" asp-action="Index" asp-route-id="@Model.project.ProjectID"> @Model.project.ProjectName </a> ) Project</h2>
 
 
 

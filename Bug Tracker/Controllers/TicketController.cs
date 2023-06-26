@@ -125,7 +125,7 @@ namespace Bug_Tracker.Controllers
 				return NotFound();
 			}
 
-            ViewData["ProjectName"] = wrapper.Project.GetById( ticket.ProjectID );
+            ViewData["ProjectName"] = wrapper.Project.GetById( ticket.ProjectID ).ProjectName;
 			ViewBag.Changes = "Update";
 			ViewBag.Priorities = wrapper.Priority.GetAllItems();
 			ViewBag.IssueTypes = wrapper.IssueType.GetAllItems();
