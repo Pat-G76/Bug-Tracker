@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net.Sockets;
+using System.Configuration;
 
 namespace Bug_Tracker.Controllers
 {
@@ -75,8 +76,6 @@ namespace Bug_Tracker.Controllers
 
             return View(ticketDetails);
                 
-
-
 		}
 
 
@@ -263,8 +262,8 @@ namespace Bug_Tracker.Controllers
 			ticketDetails.Assignee = userManager.Users.First(e => e.FirstName == ticket.AssigneeFirstName && e.LastName == ticket.AssigneeLastName);
 			ticketDetails.TicketCreator = Creator;
             ticketDetails.Statuses = wrapper.Status.GetAllItems();
-
-			ticketDetails.Comments = wrapper.Comment.FindByCondition(c => c.TicketID == id);
+			ticketDetails.Employees = wrapper.Employee.GetAllItems();
+			ticketDetails.Comments = wrapper.Comment.GetAllItems().Where(c => c.TicketID == id).Reverse();
 
             return ticketDetails;
 

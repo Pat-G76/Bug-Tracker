@@ -40,7 +40,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-
 //app.MapControllerRoute(
 //    name: "userlisting",
 //    pattern: "{controller=AdminUser}/{action=Index}/{page?}");

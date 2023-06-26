@@ -95,7 +95,7 @@ namespace Bug_Tracker.Controllers
 			{
 				var roles = await userManager.GetRolesAsync(employee);
 
-				userRoles.Add(employee.UserName, string.Join(", ", roles));
+				userRoles.Add(employee.UserName, string.Join(",", roles));
 			}
 
 			List<string> allRoles = roleManager.Roles.Select(r => r.Name).ToList();

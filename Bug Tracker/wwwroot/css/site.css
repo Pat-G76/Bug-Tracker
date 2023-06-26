@@ -43,3 +43,7 @@ tr#Tickets td {
     padding-top: 18px;
     padding-bottom: 18px;
 }
+
+body:has(.requires-no-scroll) {
+    overflow: hidden;
+}

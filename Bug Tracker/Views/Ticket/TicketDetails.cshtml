@@ -6,7 +6,6 @@
 	
 }
 
-
 <h3 class="text-center">@Model.Ticket.TicketName</h3>
 
 <br />
@@ -318,50 +317,31 @@
 
 </div>
 
-
+<br />
+<br />
+<hr />
 <br />
 <br />
 
-<script type="text/javascript">
-	
 
-$(document).ready(function() {
-  $('form').on('submit', function(e) {
-	e.preventDefault(); // Prevent the default form submission behaviour
-	// Your form submission logic here
+<form method="post" asp-action="TicketDetails" asp-route-id="@Model.Ticket.TicketID">
 
-	<form method="post" asp-action="TicketDetails" asp-route-id="@Model.Ticket.TicketID" id="myComments">
+	<textarea class="form-control" name="comment" style="resize:none;" placeholder="Write your comment here" rows="6"> </textarea>
 
-		@*<input type="hidden" id="ScrollPositionX" name="ScrollPositionX" value="@scrollPositionX" />*@
-				
-		<textarea class="form-control" name="comment" style="resize:none;" placeholder="Write your comment here" rows="6" > </textarea>
+	<button class="btn btn-primary mt-2 " type="submit" >
+		Submit
+	</button>
 
-		<button class="btn btn-primary mt-2" type="submit" @(ViewBag.IsSubmitted ? "autofocus" : "")>
-			Submit
-		</button>
-
-	</form>
-
-
-	// After submitting, scroll back to the textarea
-	var commentInput = document.getElementById('comment');
-	commentInput.scrollIntoView();
-  });
-});
-
-</script>
-
-
-@*@(ViewBag.IsSubmitted ? "autofocus" : "")*@
+</form>
 
 
 
 <br />
 <br />
 
-<h2>Comments</h2>
+<h2 id="myComments">Comments</h2>
 
-<div class="overflow-auto mt-5" style="height: 500px;">
+<div class="overflow-auto mt-5" style="height: 500px;" >
 
 
 	@foreach(var comment in Model.Comments)
@@ -372,7 +352,7 @@ $(document).ready(function() {
 		<div>
 
 			<h4>
-				@comment.Employee.FirstName @comment.Employee.LastName
+				@Model.Employees.First(e => e.Id == comment.EmployeeId).FirstName @Model.Employees.First(e => e.Id == comment.EmployeeId).LastName
 
 				<sup style="font-size: 10px; color: grey;">@Model.GetCommentPostedDate(comment.TimeCreated)</sup>
 
@@ -391,11 +371,13 @@ $(document).ready(function() {
 
 </div>
 
+@if(ViewBag.IsSubmitted)
+{
+	<script>
 
+		var scrollDiv = document.getElementById("myComments").offsetTop;
+		onload = window.scrollTo({ top: scrollDiv, behavior: 'instant' });		
 
+	</script>
 
-
-
-
-
-
+}

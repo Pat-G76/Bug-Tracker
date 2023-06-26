@@ -41,6 +41,7 @@
 		public Employee TicketCreator { get; set; }
 		public IEnumerable<Comment> Comments { get; set; }
 		public IEnumerable<Status> Statuses { get; set; }
+		public IEnumerable<Employee> Employees { get; set; }
 
 
 		public string GetCommentPostedDate(DateTime date)
