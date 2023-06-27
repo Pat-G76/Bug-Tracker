@@ -76,7 +76,7 @@
 
 	
 
-<table class="table mt-5">
+<table class="table table-bordered border-dark mt-5" id="UserList">
 
 	<thead>
 
@@ -100,12 +100,12 @@
 				<td>@item.Key.ProjectDescription</td>
 				<td>
 
-					<ul>
+					<ul class="list-group">
 
 						@foreach(var ticket in item.Value)
 						{						
 
-							<li> @ticket.TicketName </li>
+							<li class="list-group-item"> @ticket.TicketName </li>
 						
 						}
 
