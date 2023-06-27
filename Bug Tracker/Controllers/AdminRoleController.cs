@@ -23,7 +23,7 @@ namespace Bug_Tracker.Controllers
 			userManager = _userManager;
 		}
 
-
+		[HttpGet]
 		public async Task<IActionResult> Index()
 		{
 

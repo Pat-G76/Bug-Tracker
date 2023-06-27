@@ -13,12 +13,12 @@ namespace Bug_Tracker.Models
 
         public DateTime TimeCreated { get; set; }
 
-        public string EmployeeId { get; set; }
+        public string? EmployeeId { get; set; }
 		public int TicketID { get; set; }
 
 
-		public Employee Employee { get; set; }		        
-        public Ticket Ticket { get; set; }
+		public Employee? Employee { get; set; }		        
+        public Ticket? Ticket { get; set; }
 
     }
 }

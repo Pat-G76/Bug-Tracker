@@ -15,8 +15,6 @@ namespace Bug_Tracker.Models.ViewModels
         [Required(ErrorMessage = "Please enter your password")]
         [UIHint("password")]
         public string Password { get; set; }
-
-        public string? returnUrl { get; set; } = "/";
     }
 
     public class RegisterModel

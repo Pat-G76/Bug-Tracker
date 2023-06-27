@@ -7,9 +7,9 @@ namespace ContosoUniversity.Models
     {
         public int ProjectEmployeeID { get; set; }
         public int ProjectID { get; set; }
-		public string EmployeeId { get; set; }
+		public string? EmployeeId { get; set; }
 
-        public Project Project { get; set; }
-        public Employee Employee { get; set; }
+        public Project? Project { get; set; }
+        public Employee? Employee { get; set; }
     }
 }

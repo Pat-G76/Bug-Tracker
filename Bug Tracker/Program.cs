@@ -33,6 +33,8 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -44,13 +46,14 @@ app.UseAuthorization();
 //    name: "userlisting",
 //    pattern: "{controller=AdminUser}/{action=Index}/{page?}");
 
-app.MapControllerRoute(
-    name: "homepage",
-    pattern: "{controller=Project}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "homepage",
+//    pattern: "{controller=Project}/{action=Index}/{id?}");
+
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Account}/{action=Login}/{id?}");
+    pattern: "{controller=Project}/{action=Index}/{id?}");
 
 
 SeedData.EnsurePopulated(app);

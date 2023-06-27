@@ -8,6 +8,6 @@ namespace Bug_Tracker.Models
 		public string? StatusTitle { get; set; }
 
 		[ForeignKey("StatusID")]
-		public List<Ticket> Tickets { get; set; }
+		public List<Ticket>? Tickets { get; set; }
 	}
 }

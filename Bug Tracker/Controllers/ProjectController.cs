@@ -30,7 +30,6 @@ namespace Bug_Tracker.Controllers
 
 			string orderByDirection = "";
 			Expression<Func<Project, object>> orderBy;
-			Expression<Func<Project, bool>> Where;
 			IEnumerable<Project> projects;
 
 			ViewBag.TimeSort = sortBy == "TimeCreated" ? "TimeCreated_desc" : "TimeCreated";

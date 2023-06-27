@@ -11,11 +11,11 @@ namespace Bug_Tracker.Models
 
         [DisplayName("Project Name")]
         [Required(ErrorMessage = "Enter the project name")]
-        public string ProjectName { get; set; }
+        public string? ProjectName { get; set; }
 
         [DisplayName("Project Description")]
         [Required(ErrorMessage = "Enter the description on what the project is about")]
-        public string ProjectDescription { get; set; }
+        public string? ProjectDescription { get; set; }
 
         public DateTime TimeCreated { get; set; }
 

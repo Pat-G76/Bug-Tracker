@@ -10,15 +10,15 @@ namespace Bug_Tracker.Models
 
         [DisplayName("Ticket Title")]
         [Required(ErrorMessage = "Please enter the ticket name")]
-        public string TicketName { get; set; }
+        public string? TicketName { get; set; }
 
 		[DisplayName("Assignee FirstName")]
 		[Required(ErrorMessage = "Please enter the Assignee FirstName")]
-		public string AssigneeFirstName { get; set; }
+		public string? AssigneeFirstName { get; set; }
 
 		[DisplayName("Assignee LastName")]
 		[Required(ErrorMessage = "Please enter the Assignee LastName")]
-		public string AssigneeLastName { get; set; }
+		public string? AssigneeLastName { get; set; }
 
 		[DisplayName("Ticket Description")]
         [Required(ErrorMessage = "Please enter the description")]

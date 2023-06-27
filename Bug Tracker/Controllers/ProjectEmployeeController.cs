@@ -117,7 +117,7 @@ namespace Bug_Tracker.Controllers
 
 		}
 
-		public async Task<IActionResult> RemoveFromProject(int id, string EmployeeId)
+		public IActionResult RemoveFromProject(int id, string EmployeeId)
 		{
 
 			ProjectEmployee projectEmployee = wrapper.ProjectEmployee.GetProjectEmployee(id, EmployeeId);

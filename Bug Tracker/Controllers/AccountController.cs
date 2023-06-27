@@ -27,14 +27,11 @@ namespace Bug_Tracker.Controllers
         }
 
 		[AllowAnonymous]
-        public IActionResult Login(string returnUrl)
+        public IActionResult Login()
         {
             
 
-            return View(new LoginModel
-            {
-				returnUrl = returnUrl
-            });
+            return View(new LoginModel());
         }
         
         [AllowAnonymous]
@@ -87,7 +84,7 @@ namespace Bug_Tracker.Controllers
 
                         await signInManager.PasswordSignInAsync(employee, user.Password, true, false);
 
-                        return Redirect(user?.returnUrl ?? "/Project/Index");
+                        return RedirectToAction("Index", "Project");
 
                     }                    
                    

@@ -19,13 +19,13 @@ namespace Bug_Tracker.Models
         public DateTime DateCaptured { get; set; }
 
         [ForeignKey("EmployeeId")]
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
 
         [ForeignKey("EmployeeId")]
-		public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
+		public ICollection<ProjectEmployee>? ProjectEmployees { get; set; }
 
 		[ForeignKey("EmployeeId")]
-		public List<Ticket> Tickets { get; set; }
+		public List<Ticket>? Tickets { get; set; }
 
 	}
 }

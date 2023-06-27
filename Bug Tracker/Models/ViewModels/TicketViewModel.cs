@@ -55,7 +55,6 @@
 			
 			//date.Month
 
-			int temp;
 
 			if ( totalDays > 365 )
 			{

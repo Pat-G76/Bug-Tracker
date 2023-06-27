@@ -10,6 +10,6 @@ namespace Bug_Tracker.Models
 		public string? PriorityLevel { get; set; }
 
 		[ForeignKey("PriorityID")]
-		public List<Ticket> Tickets { get; set; }
+		public List<Ticket>? Tickets { get; set; }
 	}
 }

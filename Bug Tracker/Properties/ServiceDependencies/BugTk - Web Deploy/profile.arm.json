@@ -21,7 +21,7 @@
     },
     "resourceName": {
       "type": "string",
-      "defaultValue": "BugTracker20230626224905",
+      "defaultValue": "BugTk",
       "metadata": {
         "description": "Name of the main resource to be created by this template."
       }
