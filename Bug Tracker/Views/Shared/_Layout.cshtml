@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string controller = ViewContext.RouteData.Values["controller"].ToString();
+    string action = ViewContext.RouteData.Values["action"].ToString();
+}
+
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -31,14 +37,32 @@
             <div class="collapse navbar-collapse justify-content-stretch"
                  id="MyNavbar">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" asp-controller="Project" asp-action="Index">Home</a></li>
+                    <li class="nav-item">
+
+                        <a class="nav-link 
+                           @(controller == "Project" ? "active" : "")"
+                           asp-controller="Project" asp-action="Index">Home</a>
+                        
+                    </li>
                     
                     @if (User.Identity.IsAuthenticated)
                     {                        
                         @if (User.IsInRole("administrator"))
                         {
-                            <li class="nav-item"><a class="nav-link" asp-controller="AdminUser" asp-action="Index"> User Management </a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="AdminRole" asp-action="Index"> Role Management</a></li>                            
+                            <li class="nav-item">
+
+                                <a class="nav-link 
+                                   @(controller == "AdminUser" ? "active" : "")"
+                                   asp-controller="AdminUser" asp-action="Index"> User Management </a>
+                                
+                            </li>
+                            <li class="nav-item">
+
+                                <a class="nav-link 
+                                @(controller == "AdminRole" ? "active" : "")"
+                                asp-controller="AdminRole" asp-action="Index"> Role Management</a>
+                                
+                            </li>                            
                         }
                     }
                 </ul>
@@ -59,7 +83,9 @@
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Account" asp-action="Login">Log in</a>
+                            <a class="nav-link 
+                               @(controller == "Account" ? "active" : "")"
+                               asp-controller="Account" asp-action="Login">Log in</a>
                         </li>
                     }
 

@@ -36,9 +36,28 @@ namespace Bug_Tracker.Controllers
 				returnUrl = returnUrl
             });
         }
-
-
+        
         [AllowAnonymous]
+		public async Task<IActionResult> DemoLogin()
+		{
+
+            Employee employee = await userManager.FindByNameAsync("explorer");
+
+            if(employee != null)
+            {
+                await signInManager.SignOutAsync();
+
+                await signInManager.SignInAsync(employee, false);
+
+                return RedirectToAction("Index", "Project");
+            }
+
+            return RedirectToAction("Login", "Account");
+
+		}
+
+
+		[AllowAnonymous]
 		[ValidateAntiForgeryToken]
 		[HttpPost]		
         public async Task<IActionResult> Login(LoginModel user)
@@ -68,7 +87,7 @@ namespace Bug_Tracker.Controllers
 
                         await signInManager.PasswordSignInAsync(employee, user.Password, true, false);
 
-                        return Redirect(user?.returnUrl ?? "/Home/Dashboard");
+                        return Redirect(user?.returnUrl ?? "/Project/Index");
 
                     }                    
                    
