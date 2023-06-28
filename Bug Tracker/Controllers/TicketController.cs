@@ -199,7 +199,7 @@ namespace Bug_Tracker.Controllers
 
 				}
 
-				return RedirectToAction("Index", "Project");
+				return RedirectToAction("Index", "ProjectTicket", new {id = ticket.ProjectID});
 
 			}
 

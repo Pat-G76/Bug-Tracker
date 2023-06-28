@@ -1,6 +1,5 @@
 ﻿@{
     string controller = ViewContext.RouteData.Values["controller"].ToString();
-    string action = ViewContext.RouteData.Values["action"].ToString();
 }
 
 
@@ -41,11 +40,11 @@
 
                         <a class="nav-link 
                            @(controller == "Project" ? "active" : "")"
-                           asp-controller="Project" asp-action="Index">Home</a>
+                           asp-controller="Project" asp-action="Index">Project</a>
                         
                     </li>
                     
-                    @if (User.Identity.IsAuthenticated)
+                    @if(User.Identity.IsAuthenticated)
                     {                        
                         @if (User.IsInRole("administrator"))
                         {

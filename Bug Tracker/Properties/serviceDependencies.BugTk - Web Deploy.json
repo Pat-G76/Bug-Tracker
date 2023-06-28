@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "mssql3": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/BugTk/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsBugTracker_db_255DA9B194",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/bug-tkdbserver/databases/BugTracker_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:BugTracker_db"
+    }
+  }
+}

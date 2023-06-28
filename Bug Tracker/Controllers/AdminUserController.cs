@@ -113,8 +113,9 @@ namespace Bug_Tracker.Controllers
 				ItemsPerPage = pageSize,
 				TotalItems = totalPages
 			};
-			
-			return View(new UserListModel { Users = users, userRoles = userRoles, pageInfo = pageInfo, allRoles = allRoles});
+
+			return View(new UserListModel { Users = users, userRoles = userRoles, pageInfo = pageInfo, allRoles = allRoles });
+
 		}
 
 		public async Task<IActionResult> UserDetails(string id)

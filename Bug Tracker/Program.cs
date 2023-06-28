@@ -12,7 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IWrapperRepository, WrapperRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-       options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+       options.UseSqlServer(builder.Configuration.GetConnectionString("AzureConnection")));
 
 builder.Services.AddScoped<IPasswordValidator<Employee>, CustomPasswordValidator>();
 builder.Services.AddScoped<IUserValidator<Employee>, CustomUserValidator>();

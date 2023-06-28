@@ -47,7 +47,7 @@ namespace Bug_Tracker.Models
 		public Employee? Employee { get; set; }
 
 		[ForeignKey("TicketID")]
-		public List<Comment>? Comments { get; set; }
+		public ICollection<Comment>? Comments { get; set; }
 
 
 	}

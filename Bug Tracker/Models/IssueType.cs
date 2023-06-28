@@ -7,7 +7,7 @@ namespace Bug_Tracker.Models
 		public int IssueTypeID { get; set; }
 		public string? TypeTitle { get; set; }
 		[ForeignKey("TypeID")]
-		public List<Ticket>? Tickets { get; set; }
+		public ICollection<Ticket>? Tickets { get; set; }
 
 	}
 }
