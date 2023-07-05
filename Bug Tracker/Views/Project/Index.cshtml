@@ -41,6 +41,8 @@
 					Creation Date
 				</a>
 			</th>
+			<th width="30px"></th>
+			<th width="30px"></th>
 			<th></th>
 		</tr>
 
@@ -59,19 +61,26 @@
 				</td>
 				<td>@project.ProjectDescription</td>
 				<td>@project.TimeCreated</td>
-				<td>
+				
 					
-					@if (User.IsInRole("administrator"))
-					{
+				@if (User.IsInRole("administrator"))
+				{
+					<td>
 						<a class="btn btn-primary" asp-action="UpdateProject" asp-route-id="@project.ProjectID">
 							<i class="fas fa-edit"></i>
 						</a>
+					</td>
+					
+					<td>
 						<a class="btn btn-primary" asp-controller="ProjectEmployee" asp-action="Index" asp-route-id="@project.ProjectID">
 							<i class="fa-solid fa-user-plus fa-sm"></i>
 						</a>
-					}
+					</td>
 
-				</td>
+					<td></td>
+					
+				}
+				
 			</tr>
 		}
 
