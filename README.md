@@ -25,9 +25,13 @@ Bug tracking is the process of logging and monitoring bugs or errors during soft
   <li>Administrator
     <ul>
       <li>
-        A user with administrator role can see all the projects currently on the sites and users with developer
-        role can only see projects assigned to them by the administrator.   
+        Can see all the projects currently on the sites and users with developer
       </li>
+      <li> Can create new projects </li>
+      <li> Can edite existing projects </li>
     </ul>
   </li>
+
+
+  role can only see projects assigned to them by the administrator
 </ul>
