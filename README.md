@@ -1,16 +1,15 @@
-<h1> Bug-Tracker </h1>
+<h2> Bug-Tracker </h1>
 
 Bug tracking is the process of logging and monitoring bugs or errors during software testing.
 
+<h2> Web pages descripion </h2>
 
-##Web pages descripion
-
-#Register page
+<h3> Register page </h3>
 
 - A user can enter the requested details and register to the website. It has costom errors that
   enforce certain rules.
 
-#Login page
+<h3> Login page </h3>
 
 - If a user already registered and his/her account was approved by the administrator, he/she can
   successfully login to the site.
@@ -20,7 +19,18 @@ Bug tracking is the process of logging and monitoring bugs or errors during soft
   an administrator meaning you can do/edit almost anything in the site. Poor idea but it is for people
   to see how the site works
 
-#Main/Project page
+<h3> Main/Project page </h3>
+
+<ul>
+  <li>Coffee</li>
+  <li>Tea
+    <ul>
+      <li>Black tea</li>
+      <li>Green tea</li>
+    </ul>
+  </li>
+  <li>Milk</li>
+</ul>
 
 - A user with administrator role can see all the projects currently on the sites and users with developer
   role can only see projects assigned to them by the administrator. 
