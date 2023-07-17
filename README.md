@@ -6,7 +6,7 @@ Bug tracking is the process of logging and monitoring bugs or errors during soft
 
 <h3> Register page </h3>
 
-- A user can enter the requested details and register to the website. It has custom errors that
+- A user can enter the requested details and register on the website. It has custom errors that
   enforce certain rules.
 
 <h3> Login page </h3>
@@ -21,7 +21,7 @@ Bug tracking is the process of logging and monitoring bugs or errors during soft
 
 <h3> Main/Project page </h3>
 
-- The administrator can see all the projects currently on the sites but the developers can only see 
+- The administrator can see all the projects currently on the sites, but the developers can only see 
   projects assigned to them by the administrator
 - The administrator can create new projects, edit existing ones and add users to the project
 
@@ -29,9 +29,9 @@ Bug tracking is the process of logging and monitoring bugs or errors during soft
 
 - List all users that registered to the bug tracker website
 - Can only be accessed by the administrator
-- You can view a specific user details, edit their profile and also delete them.
+- You can view specific user details, edit their profile and delete them. 
 - Users can be sorted by a certain role
-- Users can be searched by their firstname, lastname or username
+- Users can be searched by their first name, last name or username 
 
 <h3> Role Management page </h3>
 
