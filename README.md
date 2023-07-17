@@ -21,17 +21,34 @@ Bug tracking is the process of logging and monitoring bugs or errors during soft
 
 <h3> Main/Project page </h3>
 
-<ul>
-  <li>Administrator
-    <ul>
-      <li>
-        Can see all the projects currently on the sites and users with developer
-      </li>
-      <li> Can create new projects </li>
-      <li> Can edite existing projects </li>
-    </ul>
-  </li>
+- The administrator can see all the projects currently on the sites but the developers can only see 
+  projects assigned to them by the administrator
+- The administrator can create new projects, edit existing ones and add users to the project
+
+<h3> User Management page </h3>
+
+- List all users that registered to the bug tracker website
+- Can only be accessed by the administrator
+- You can view a specific user details, edit their profile and also delete them.
+- Users can be sorted by a certain role
+- Users can be searched by their firstname, lastname or username
+
+<h3> Role Management page </h3>
+
+- Roles are titles given to users to limit them on what they can do on the website
+- List all roles currently available
+- Can only be accessed by the administrator
+- You can edit a specific role and also delete them.
+- You can also create a new role
+
+<h3> ProjectTicket page </h3>
+
+-  List all the tickets for a project selected in the main page grouped by status
+-  A ticket can be a Defect, Enhancement, Feature, Task or Patch that needs to be
+   implemented in certain section of the software
+-  Tickets are sorted in the following order : Tickets assigned to you > tickets created by you > rest of tickets
+-  A developer can create a ticket
+-  You can open any ticket you see and see its details
 
 
-  role can only see projects assigned to them by the administrator
-</ul>
+
