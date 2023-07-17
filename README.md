@@ -21,16 +21,7 @@ Bug tracking is the process of logging and monitoring bugs or errors during soft
 
 <h3> Main/Project page </h3>
 
-<ul>
-  <li>Coffee</li>
-  <li>Tea
-    <ul>
-      <li>Black tea</li>
-      <li>Green tea</li>
-    </ul>
-  </li>
-  <li>Milk</li>
-</ul>
+<h4> Administrator </h4>
 
 - A user with administrator role can see all the projects currently on the sites and users with developer
   role can only see projects assigned to them by the administrator. 
