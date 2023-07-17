@@ -48,7 +48,7 @@ Bug tracking is the process of logging and monitoring bugs or errors during soft
    implemented in certain section of the software
 -  Tickets are sorted in the following order : Tickets assigned to you > tickets created by you > rest of tickets
 -  A developer can create a ticket
--  You can open any ticket you see and see its details
+-  You can open any ticket you see and see its details. The assignor and assignee can edit the ticket details
 
 
 
