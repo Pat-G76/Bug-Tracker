@@ -6,7 +6,7 @@ Bug tracking is the process of logging and monitoring bugs or errors during soft
 
 <h3> Register page </h3>
 
-- A user can enter the requested details and register to the website. It has costom errors that
+- A user can enter the requested details and register to the website. It has custom errors that
   enforce certain rules.
 
 <h3> Login page </h3>
