@@ -3,7 +3,6 @@
 
 https://www.youtube.com/watch?v=QIHD9kbpmos&ab_channel=PatrickMan
 
-
 <h2> Bug-Tracker </h1>
 
 Bug tracking is the process of logging and monitoring bugs or errors during software testing.
