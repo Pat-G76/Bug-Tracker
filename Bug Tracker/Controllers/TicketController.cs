@@ -120,7 +120,7 @@ namespace Bug_Tracker.Controllers
             {
                 return NotFound();
             }
-            else if (!await userManager.IsInRoleAsync(employee, "administrator") && !IsInProject(employee, id))
+            else if (!await userManager.IsInRoleAsync(employee, "administrator") && !IsInProject(employee, ticket.ProjectID))
 			{
 				return NotFound();
 			}

@@ -1,4 +1,9 @@
 
+
+input, textarea{
+    border: 1px solid #000000 !important;
+}
+
 table#users th {
    margin: 20px;
    text-align:left;
